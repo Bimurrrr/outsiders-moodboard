@@ -1,6 +1,6 @@
 # THE OUTSIDERS — Status / Handover
 
-> Letzte Aktualisierung: 2026-06-01
+> Letzte Aktualisierung: 2026-06-01 (Char-Restyle-Pass)
 > Projekt-Lead: Bimurrrr · Story: Finn Delius
 
 ## Was ist live
@@ -26,19 +26,19 @@
 |---|------|-------|--------|
 | 01 | X-Rat 🔒 | 90s Skate Cartoon (Master, locked) | Porn-Site-Mascot (X-Hamster-Parodie), EU-Bann 2024 |
 | 02 | Kawai | Photoreal Kaiju Suit | Tokyo-Streetfashion-Pilot, nie ausgezogen |
-| 03 | Mr. Pem | Photoreal AI Editorial | Britischer Luxury-Wool, casual Klassismus, Empire-Trauer |
-| 04 | Zayn | Photoreal AI Editorial | Streetwear-Brand pleite, €40k Schulden, Consumerism |
+| 03 | Mr. Pem | Photoreal AI Editorial ⚠ | Britischer Luxury-Wool, casual Klassismus, Empire-Trauer |
+| 04 | Zayn | Photoreal AI Editorial ⚠ | Streetwear-Brand pleite, €40k Schulden, Consumerism |
 | 05 | Truffl | Felt Sock Puppet | Kinder-TV gecancelt, parasoziale Krise |
-| 06 | Schaumi | Hand-drawn Illustration | Waschanlagen-Mascot, Looksmaxxing-Stamm |
+| 06 | Schaumi ✓ | Plush Mascot Suit (v2) | Waschanlagen-Mascot, Looksmaxxing-Stamm |
 | 07 | Rover | Retro 8-Bit Pixel | Win-ME-Search-Agent, Spektrum/OCD |
-| 08 | Bobby Yellow | Vintage 80s Mascot | Post-It-Pitch, identity-loss |
+| 08 | Bobby Yellow ✓ | Plush Mascot Suit (v2) | Post-It-Pitch, identity-loss |
 | 09 | Cashy | PS2 Low-Poly 3D | Arcade-Game discontinued, Memecoin-Crash |
 | 10 | Purrz | Vintage Kawaii | Sanrio-Style, BPD, ED, permanent-lächeln-Trauma |
 | 11 | Marso | Vintage 60s Cartoon | Belgisches Comic-Pilot, Dissoziation |
 | 12 | Krazy | 90s Hanna-Barbera | Cancelled Antagonist, Tate-radicalized, Wut-Tränen |
 | 13 | Diabla | Claymation | Adult-Swim-Pilot, Alkoholismus, AA-Dropout |
-| 14 | Onyx | Anime Cel-Shaded | Crypto-NFT-Mascot, rug-pulled, Day-Trading-Grooming |
-| 15 | Zelma & Zimmer | Y2K Bratz Doll Duo | Codependent toxic couple seit 2004 |
+| 14 | Onyx ✓ | 3D Toy Sculpt (v2) | Crypto-NFT-Mascot, rug-pulled, Day-Trading-Grooming |
+| 15 | Zelma & Zimmer ✓ | Y2K Bratz Doll Duo (v2) | Codependent toxic couple seit 2004 |
 | 16 | Bobby Girl | Vintage 50s Cartoon | Bobby-Family, People-Pleaser-Burnout |
 
 ## Style-DNA (User-validated)
@@ -49,26 +49,31 @@
 
 ## ⚠ OFFEN — als nächstes dran
 
-### Style-Push: Cast in „MTV-Trash-TV / Wonder-Showzen / Liquid Television"-Richtung optimieren
+### Char-Restyle-Status (2026-06-01)
 
-User hat 4 Refs gepostet die zeigen wohin: rauer, uncannier, weniger clean. Aktuelle Chars zu „editorial polished".
+**Erledigt — neuer „geschickter" Look bestätigt:**
+- ✅ **Bobby Yellow** → Plush Mascot Suit (gelb/rot/blau, fleece + visible stitching, embroidered face)
+- ✅ **Schaumi** → Plush Mascot Suit (cloud-shape, iridescent foam, embroidered chiseled Looksmaxxing-face mit Mewing-Posture)
+- ✅ **Onyx** → 3D Toy Sculpt (Panther-Kopf + humanoider Körper, weißer Puffer, hält Chihuahua, glossy plastic surface)
+- ✅ **Zelma & Zimmer** → Y2K Bratz Doll Duo v2 (BRAT + ANGEL tees, butterfly-cargo-jeans, codependent body language, lavender BG)
 
-**Konkret zu redo (Vorschläge mit User-Sign-off pending):**
-- **Diabla** → Freak-Clay (statt sauberes Aardman): schiefe Anatomie, Mörder-Zähne, raw plasticine
-- **Mr. Pem** → Wax-Figure-Uncanny (AI-warped, „CANCEL ME"-energy)
-- **Onyx** → AI-Warped Photoreal statt clean Anime-Cel
-- **Bobby Boy NEU** → 3D-Caricature-Meme-Style (TikTok-meme-3D)
-- **Marso** → komplett ersetzen durch Mascot-Suit-3D (McDonald's-Crew-vibe, pluschig laut)
-- **Schaumi** → ersetzen oder rauer machen, geht aktuell im Grid unter
-- **Bobby Yellow** → keep oder Mascot-Suit-3D-variant
+**Still offen — gleiche Style-Logik anwenden:**
+- 🔴 **Mr. Pem** → Wax-Figure-Uncanny (Madame-Tussauds, leicht schmelzend, britisch-aristokrat, „CANCEL ME"-Energy)
+- 🔴 **Zayn** → 3D Toy Sculpt (Bear-Streetwear-Toy, hält Invoices + maxed credit card, bankrupt-eyes)
 
-**Refs für die Style-Push-Generationen** sind im aktuellen Chat (Stop-Motion Sun-Freak, 3D-Caricature-Black-Boy, McDonald's-Mascot-Crew, AI-Warped-„Cancel-Me"-Person). Falls neuer Chat: User fragen nach Re-Upload der Refs.
+**Confirmed Style-Map:**
+- **STYLE A — Plush Mascot Suit:** Fleece-Stoff, sichtbare Naht-Stitches, gestickte Gesichts-Features, Pastell-BG, Studio-Product-Light. Funktioniert für: Bobby Yellow, Schaumi.
+- **STYLE B — 3D Toy Sculpt:** Anthropomorpher Tier-Kopf + humanoider Körper, moderne Streetwear, glatte 3D-Plastik-Oberfläche, leichte Karikatur, Pastell-BG. Funktioniert für: Onyx. Geplant für: Zayn.
+- **STYLE C — Y2K Bratz Doll:** Glossy plastic Bratz-Proportionen, lippenbeißt anime-eyes, 2004-Outfit. Funktioniert für: Zelma & Zimmer.
+- **STYLE D — Wax-Figure-Uncanny:** Madame-Tussauds-Wachs, leichter Schmelz, Museumslicht. Geplant für: Mr. Pem.
+
+**Prompts für Mr. Pem + Zayn** stehen ausformuliert im Chat (2026-06-01).
 
 ### Andere offene Punkte
 
 - **Custom Domain `outsiders-mascots.com`** noch nicht gekauft. User wollte. WHOIS bestätigt verfügbar. Cloudflare-Registrar ~$10/Jahr. Sobald gekauft: CNAME zu `bimurrrr.github.io`.
 - **Group-Shot / Klassenfoto** v2 fertig (`hf_20260531_225338_de1ca84e-...png`), aber Style-Drift noch nicht 100% — wartet auf Bestätigung ob als Hero-Banner einbauen oder weiter iterieren.
-- **Episode 1 Skript** — noch nicht angefangen. Storyboard-Notes in Finns Trello-Karten (siehe „Random Story Ideen" + „Erste Folge skripten" im Trello).
+- **Episode 1 Skript** — Beat-Outline („NEW MEMBER / THE INTAKE" mit Stranger=Gemmy, X-Rat als Moderator) steht im Chat 2026-06-01, noch nicht commited als episode-01.md. Pending User-Sign-off auf Beats. Locations daraus: Meeting Room Wide / Close / Detail + Exterior Entrance.
 - **Animation-Tests** mit Higgsfield — noch nicht gestartet. Plan: X-Rat als Personal-Clipper-Character locken, dann erste 5-Sek-Clips.
 
 ## Tools / Zugänge
