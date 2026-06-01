@@ -20,9 +20,10 @@
 **Episode 1:** Selbsthilfegruppen-Treffen, ein Fremder kommt rein
 **Premiere:** Winter 2026
 
-## Cast — 19 Outsiders
+## Cast — 18 Outsiders
 
 ✓ = neuer Style live · ⚠ = noch alter Style, redo offen
+(Truffl 2026-06-02 entfernt; live lückenlos neu nummeriert 01–18)
 
 | # | Name | Style | Trauma |
 |---|------|-------|--------|
@@ -30,7 +31,6 @@
 | 02 | Kawai | Photoreal Kaiju Suit ⚠ | Tokyo-Streetfashion-Pilot, nie ausgezogen |
 | 03 | Mr. Pem ✓ | 3D Hyperreal Uncanny (anthro-cat tweed) | Britischer Luxury-Wool, casual Klassismus, Empire-Trauer |
 | 04 | Chico ✓ | 3D Hyperreal (ZAYN-Chimp, Streetwear) | Streetwear-Brand pleite, €40k Schulden, Consumerism (vorher: Zayn) |
-| 05 | Truffl | Felt Sock Puppet ⚠ | Kinder-TV gecancelt, parasoziale Krise |
 | 06 | Schaumi ✓ | Plush Mascot Suit (v2) | Waschanlagen-Mascot, Looksmaxxing-Stamm |
 | 07 | Fetch ✓ | Low-Poly 3D (red search-dog) | Win-ME-Search-Agent, Spektrum/OCD (vorher: Rover) |
 | 08 | Bobby Yellow ✓ | Plush Mascot Suit (v2) | Post-It-Pitch, identity-loss |
