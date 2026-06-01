@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE OUTSIDERS — CH-01 · ON AIR WINTER 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Inter:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;700&family=VT323&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #060607;
+    --bg-2: #0e0e10;
+    --panel: #131316;
+    --line: #2c2c31;
+    --fg: #fff;
+    --muted: #8a8a92;
+    --pink: #ff2d95;
+    --yellow: #f5e000;
+    --green: #00e88a;
+    --cyan: #18c9ff;
+    --red: #ff2b2b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "Inter", -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ───── GLOBAL CRT OVERLAYS ───── */
+  /* scanlines */
+  body::before {
+    content: ""; position: fixed; inset: 0;
+    pointer-events: none; z-index: 9998;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(0,0,0,0) 0px,
+      rgba(0,0,0,0) 2px,
+      rgba(0,0,0,0.18) 3px,
+      rgba(0,0,0,0.18) 4px
+    );
+    mix-blend-mode: multiply;
+  }
+  /* film grain + vignette */
+  body::after {
+    content: ""; position: fixed; inset: 0;
+    pointer-events: none; z-index: 9999;
+    opacity: 0.06;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .vignette {
+    position: fixed; inset: 0; pointer-events: none; z-index: 9997;
+    box-shadow: inset 0 0 200px 40px rgba(0,0,0,0.65);
+  }
+
+  /* ───── OSD / BROADCAST TYPE ───── */
+  .osd { font-family: "VT323", monospace; letter-spacing: 0.02em; }
+  .mono { font-family: "JetBrains Mono", monospace; }
+
+  /* ───── TOP BROADCAST BAR ───── */
+  .bcast-bar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(6,6,7,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 9px 16px;
+    font-family: "VT323", monospace;
+    font-size: 20px;
+  }
+  .bcast-left, .bcast-right { display: flex; align-items: center; gap: 14px; }
+  .ch-bug {
+    background: var(--fg); color: var(--bg);
+    font-family: "Archivo Black", sans-serif;
+    font-size: 13px; padding: 3px 8px; letter-spacing: -0.02em;
+  }
+  .onair {
+    display: flex; align-items: center; gap: 7px;
+    color: var(--red); font-size: 19px; text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .onair .dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--red); box-shadow: 0 0 10px var(--red);
+    animation: blink 1.4s steps(1) infinite;
+  }
+  @keyframes blink { 0%,49%{opacity:1} 50%,100%{opacity:0.25} }
+  .bcast-clock { color: var(--green); font-size: 20px; }
+  .bcast-bar .lbl { color: var(--muted); }
+  @media (max-width:760px){
+    .bcast-bar { font-size: 16px; padding: 7px 10px; }
+    .bcast-mid { display:none; }
+    .onair { font-size: 15px; }
+  }
+
+  /* ───── HERO / TITLE CARD ───── */
+  .hero {
+    min-height: 100vh;
+    padding: 70px 20px 40px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    position: relative; text-align: center;
+    background:
+      radial-gradient(ellipse at 50% 35%, rgba(255,45,149,0.12), transparent 60%),
+      var(--bg);
+  }
+  /* SMPTE colour bars strip */
+  .bars { display: flex; width: 100%; max-width: 1100px; height: 14px; margin-bottom: 26px; }
+  .bars i { flex: 1; }
+  .bars i:nth-child(1){background:#bdbdbd}
+  .bars i:nth-child(2){background:var(--yellow)}
+  .bars i:nth-child(3){background:var(--cyan)}
+  .bars i:nth-child(4){background:var(--green)}
+  .bars i:nth-child(5){background:var(--pink)}
+  .bars i:nth-child(6){background:var(--red)}
+  .bars i:nth-child(7){background:#1f4cff}
+
+  .hero-osd {
+    font-family: "VT323", monospace; font-size: 22px;
+    color: var(--green); margin-bottom: 14px; letter-spacing: 0.04em;
+  }
+  .hero-osd .blink { animation: blink 1s steps(1) infinite; color: var(--red); }
+  .hero-logo-img { max-width: 92%; width: 920px; height: auto; display: block;
+    filter: drop-shadow(2px 0 0 rgba(255,45,149,0.5)) drop-shadow(-2px 0 0 rgba(24,201,255,0.4)); }
+  .hero-sub {
+    font-size: clamp(15px, 1.5vw, 19px); margin: 18px 0 26px; max-width: 600px;
+    line-height: 1.45; font-weight: 600; color: #d6d6db;
+  }
+  .hero-strip {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 0;
+    border: 1px solid var(--line); font-family: "JetBrains Mono", monospace;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 30px;
+  }
+  .hero-strip span { padding: 9px 16px; border-right: 1px solid var(--line); font-weight: 700; }
+  .hero-strip span:last-child { border-right: 0; }
+  .hero-strip b { color: var(--pink); font-weight: 900; }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: var(--pink); color: var(--bg);
+    padding: 16px 34px; font-weight: 900; font-size: 15px;
+    text-decoration: none; cursor: pointer; border: 0;
+    font-family: "Archivo Black", sans-serif; text-transform: uppercase; letter-spacing: 0.04em;
+    transition: transform .12s, background .12s;
+  }
+  .hero-cta:hover { background: var(--yellow); transform: translateY(-2px); }
+  .hero-cta::before {
+    content:""; width:0;height:0;border-left:14px solid currentColor;
+    border-top:9px solid transparent;border-bottom:9px solid transparent;
+  }
+
+  /* ───── TICKER ───── */
+  .ticker {
+    background: var(--pink); color: var(--bg);
+    border-top: 2px solid var(--bg); border-bottom: 2px solid var(--bg);
+    overflow: hidden; padding: 11px 0; position: relative;
+  }
+  .ticker.alt { background: var(--bg); color: var(--fg); border-color: var(--line); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .ticker::before {
+    content: "● BREAKING"; position: absolute; left: 0; top: 0; bottom: 0; z-index: 2;
+    display: flex; align-items: center; padding: 0 16px;
+    background: var(--bg); color: var(--red); font-family: "JetBrains Mono", monospace;
+    font-weight: 700; font-size: 12px; letter-spacing: 0.1em;
+  }
+  .ticker.alt::before { content: "● NOW"; background: var(--green); color: var(--bg); }
+  .ticker-track { display: flex; gap: 38px; white-space: nowrap; width: max-content;
+    animation: crawl 38s linear infinite; padding-left: 130px; }
+  .ticker span { font-family: "Anton", sans-serif; font-size: 26px; text-transform: uppercase; letter-spacing: 0.02em; }
+  .ticker span::after { content: " ◆"; margin-left: 36px; color: var(--bg); opacity:0.5; }
+  .ticker.alt span::after { color: var(--green); opacity:1; }
+  @keyframes crawl { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+  /* ───── SECTIONS ───── */
+  section { padding: 70px 22px; max-width: 1640px; margin: 0 auto; }
+  /* lower-third style section header */
+  .lower-third { display: inline-flex; flex-direction: column; margin-bottom: 38px; }
+  .lt-tag {
+    align-self: flex-start; background: var(--cyan); color: var(--bg);
+    font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase; padding: 4px 10px;
+  }
+  .lt-title {
+    background: var(--fg); color: var(--bg);
+    font-family: "Anton", sans-serif; font-size: clamp(34px, 6vw, 78px);
+    line-height: 0.96; text-transform: uppercase; letter-spacing: -0.01em;
+    padding: 6px 16px 8px; margin-top: -1px;
+  }
+  .lt-sub { color: var(--muted); font-size: 13px; margin-top: 14px; max-width: 680px; line-height: 1.5; font-weight: 500; }
+
+  /* ───── CAST = CHANNEL GRID ───── */
+  .cast-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(255px, 1fr)); gap: 18px; }
+  .char {
+    position: relative; background: var(--panel); border: 1px solid var(--line);
+    cursor: pointer; display: flex; flex-direction: column; overflow: hidden;
+    transition: transform .16s, border-color .16s, box-shadow .16s;
+  }
+  .char:hover { transform: translateY(-5px); border-color: var(--cyan);
+    box-shadow: 0 16px 40px rgba(24,201,255,0.22), 0 0 0 1px var(--cyan); }
+  /* CRT screen */
+  .char-img-wrap { position: relative; background: #000; overflow: hidden; }
+  .char img { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block;
+    transition: transform .4s cubic-bezier(.4,0,.2,1); }
+  .char:hover img { transform: scale(1.05); }
+  /* scanlines on screen */
+  .char-img-wrap::before {
+    content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background: repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0 2px, rgba(0,0,0,0.22) 3px 4px);
+  }
+  /* channel bug */
+  .char-corner {
+    position: absolute; top: 8px; left: 8px; z-index: 3;
+    background: rgba(0,0,0,0.8); color: var(--fg);
+    font-family: "VT323", monospace; font-size: 18px; line-height: 1;
+    padding: 3px 8px; border: 1px solid rgba(255,255,255,0.25);
+  }
+  .char-corner::before { content: "CH "; color: var(--green); }
+  /* on-air tag */
+  .char-img-wrap::after {
+    content: "● ON AIR"; position: absolute; top: 8px; right: 8px; z-index: 3;
+    background: var(--red); color: #fff; font-family: "JetBrains Mono", monospace;
+    font-size: 9px; font-weight: 700; letter-spacing: 0.08em; padding: 3px 6px;
+  }
+  /* female / male gender tag — bottom-left OSD */
+  .char.female .char-meta::after,
+  .char.male .char-meta::after {
+    position: absolute; bottom: 16px; right: 14px;
+    width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 900; color: var(--bg); z-index: 4;
+  }
+  .char.female .char-meta::after { content: "♀"; background: var(--pink); }
+  .char.male .char-meta::after { content: "♂"; background: var(--cyan); }
+  .char-meta { position: relative; padding: 14px 16px 18px; border-top: 1px solid var(--line); background: var(--panel); }
+  .char-name { font-family: "Archivo Black", sans-serif; font-size: 22px; letter-spacing: -0.02em;
+    text-transform: uppercase; line-height: 1; padding-right: 30px; }
+  .char-meta-row { display: flex; justify-content: space-between; align-items: center; gap: 8px;
+    margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--line); }
+  .char-version { font-family: "VT323", monospace; font-size: 17px; color: var(--green); line-height:1; }
+  .char-style { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em;
+    font-weight: 700; font-family: "JetBrains Mono", monospace; text-align: right; }
+  .char.couple .char-img-wrap .duo {
+    position: absolute; bottom: 8px; left: 8px; z-index: 3;
+    background: var(--yellow); color: var(--bg); font-family: "JetBrains Mono", monospace;
+    font-size: 9px; font-weight: 800; padding: 3px 7px; letter-spacing: 0.12em;
+  }
+
+  /* ───── INFO PANELS (concept / format / team) ───── */
+  .panel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    border: 1px solid var(--line); }
+  .panel-card { background: var(--bg); border-right: 1px solid var(--line); padding: 32px 28px; }
+  .panel-card:last-child { border-right: 0; }
+  .panel-card h3 { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.16em;
+    text-transform: uppercase; margin-bottom: 14px; color: var(--cyan); }
+  .panel-card:nth-child(2) h3 { color: var(--pink); }
+  .panel-card:nth-child(3) h3 { color: var(--green); }
+  .panel-card p { font-size: 15px; line-height: 1.55; font-weight: 500; color: #e2e2e6; }
+  .panel-card .big { font-family: "Anton", sans-serif; font-size: 38px; line-height: 0.95;
+    text-transform: uppercase; margin-bottom: 8px; }
+  .panel-card .sub { color: var(--muted); font-size: 13px; font-weight: 500; }
+  @media (max-width:760px){ .panel-card{ border-right:0; border-bottom:1px solid var(--line);} .panel-card:last-child{border-bottom:0;} }
+
+  /* ───── FOOTER = TEST CARD ───── */
+  footer { margin-top: 30px; }
+  .testcard { padding: 60px 22px; text-align: center; background: var(--bg); border-top: 1px solid var(--line); }
+  .testcard .bars { margin: 0 auto 30px; height: 60px; max-width: 760px; }
+  .signoff { font-family: "Anton", sans-serif; font-size: clamp(40px, 9vw, 130px);
+    line-height: 0.9; text-transform: uppercase; letter-spacing: -0.02em; }
+  .signoff .glow { color: var(--green); }
+  .testcard .stamp { font-family: "VT323", monospace; font-size: 22px; color: var(--muted); margin-top: 18px; }
+  .footer-bottom { padding: 28px 22px; text-align: center; border-top: 1px solid var(--line); }
+  .footer-bottom .credits { font-family: "JetBrains Mono", monospace; font-size: 11px;
+    letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; }
+  .footer-bottom .copy { margin-top: 12px; font-size: 10px; color: var(--muted);
+    font-family: "JetBrains Mono", monospace; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* ───── MODAL ───── */
+  .modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,0.93); backdrop-filter: blur(8px);
+    display: none; align-items: center; justify-content: center; z-index: 200; padding: 22px; }
+  .modal-bg.open { display: flex; }
+  .modal { background: var(--panel); border: 2px solid var(--cyan); box-shadow: 10px 10px 0 var(--pink);
+    max-width: 1000px; width: 100%; max-height: 90vh; display: grid; grid-template-columns: 1fr 1fr;
+    overflow: hidden; position: relative; }
+  .modal-img { background: #000; position: relative; }
+  .modal-img::before { content:""; position:absolute; inset:0; z-index:2; pointer-events:none;
+    background: repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0 2px, rgba(0,0,0,0.2) 3px 4px); }
+  .modal-img::after { content:"● REC"; position:absolute; top:12px; left:12px; z-index:3;
+    font-family:"JetBrains Mono",monospace; font-size:11px; font-weight:700; color:var(--red); }
+  .modal-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .modal-body { padding: 34px 30px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; }
+  .modal-body .num { font-family: "VT323", monospace; font-size: 20px; color: var(--cyan); }
+  .modal-body h2 { font-family: "Anton", sans-serif; font-size: 46px; line-height: 1; color: var(--fg);
+    text-shadow: 2px 0 var(--pink), -2px 0 var(--cyan); text-transform: uppercase; }
+  .modal-body .version-line { font-family: "JetBrains Mono", monospace; color: var(--green); font-size: 13px; font-weight: 700; }
+  .modal-body .style-label { display: inline-block; background: var(--cyan); color: var(--bg);
+    padding: 6px 12px; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 900;
+    width: fit-content; font-family: "JetBrains Mono", monospace; }
+  .modal-body .lore-label { font-family: "JetBrains Mono", monospace; color: var(--pink); font-size: 11px;
+    letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; }
+  .modal-body .desc { font-size: 15px; line-height: 1.6; color: #e6e6ea; }
+  .modal-close { position: absolute; top: 12px; right: 14px; background: var(--pink); color: var(--bg);
+    width: 36px; height: 36px; border: 2px solid var(--bg); cursor: pointer; font-size: 20px; line-height: 1;
+    display: flex; align-items: center; justify-content: center; font-weight: 900; z-index: 4; }
+  .modal-close:hover { background: var(--yellow); }
+  @media (max-width:768px){ .modal{grid-template-columns:1fr;} .modal-img{aspect-ratio:3/4;} .modal-body{padding:24px 20px;} .modal-body h2{font-size:32px;} }
+
+  /* ───── MOBILE ───── */
+  @media (max-width:900px){
+    section { padding: 54px 14px; }
+    .cast-grid { grid-template-columns: repeat(2,1fr); gap: 11px; }
+    .char-name { font-size: 17px; }
+    .hero-strip { flex-direction: column; max-width: 320px; }
+    .hero-strip span { border-right: 0; border-bottom: 1px solid var(--line); text-align: center; }
+    .hero-strip span:last-child { border-bottom: 0; }
+  }
+  @media (max-width:480px){ .cast-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="vignette"></div>
+
+<!-- BROADCAST BAR -->
+<div class="bcast-bar osd">
+  <div class="bcast-left">
+    <span class="ch-bug">OA</span>
+    <span class="onair"><span class="dot"></span>ON AIR</span>
+  </div>
+  <div class="bcast-mid"><span class="lbl">PROG ▸</span> OUTSIDERS ANONYMOUS</div>
+  <div class="bcast-right">
+    <span class="lbl">CH</span><span>01</span>
+    <span class="bcast-clock" id="clock">--:--:--</span>
+  </div>
+</div>
+
+<!-- HERO / TITLE CARD -->
+<header class="hero">
+  <div class="bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="hero-osd">▶ PROGRAMMVORSCHAU · <span class="blink">● REC</span></div>
+  <img src="logo.png" class="hero-logo-img" alt="THE OUTSIDERS">
+  <p class="hero-sub">Eine Serie über deprecated AI-Mascots, die sich in der Selbsthilfegruppe „Outsiders Anonymous” auf sich selbst treffen.</p>
+  <div class="hero-strip">
+    <span><b>19</b> · Outsiders</span>
+    <span>Mixed Media</span>
+    <span>2-min Folgen</span>
+    <span>Vertikal</span>
+  </div>
+  <button class="hero-cta" onclick="document.getElementById('cast').scrollIntoView()">Sendeplan ansehen</button>
+</header>
+
+<!-- TICKER 1 -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span>OUTSIDERS ANONYMOUS</span><span>ON AIR WINTER 2026</span><span>DEPRECATED MASCOTS UNITE</span><span>NEUE FOLGE JEDE WOCHE</span>
+    <span>OUTSIDERS ANONYMOUS</span><span>ON AIR WINTER 2026</span><span>DEPRECATED MASCOTS UNITE</span><span>NEUE FOLGE JEDE WOCHE</span>
+  </div>
+</div>
+
+<!-- CAST / SENDEPLAN -->
+<section id="cast">
+  <div class="lower-third">
+    <span class="lt-tag">01 / SENDEPLAN</span>
+    <span class="lt-title">MEET THE OUTSIDERS</span>
+  </div>
+  <p class="lt-sub">19 Kanäle. Jeder aus einer anderen Medien-Ära. Klick für die Origin-Story. Reihenfolge wechselt bei jedem Einschalten.</p>
+  <div class="cast-grid" id="cast-grid"></div>
+</section>
+
+<!-- TICKER 2 -->
+<div class="ticker alt">
+  <div class="ticker-track">
+    <span>19 OUTSIDERS</span><span>10 STYLES</span><span>1 RAUM</span><span>KEIN AUSGANG</span>
+    <span>19 OUTSIDERS</span><span>10 STYLES</span><span>1 RAUM</span><span>KEIN AUSGANG</span>
+  </div>
+</div>
+
+<!-- CONCEPT / PROGRAMMHINWEIS -->
+<section id="concept">
+  <div class="lower-third">
+    <span class="lt-tag">02 / PROGRAMMHINWEIS</span>
+    <span class="lt-title">OUTSIDERS ANONYMOUS</span>
+  </div>
+  <div class="panel-grid">
+    <div class="panel-card">
+      <h3>Der Pitch</h3>
+      <p>Eine Selbsthilfegruppe deprecated, cancelled und vergessener Brand-Mascots trifft sich in einem liminalen Wartesaal um Geschichten zu teilen. Folge 1: ein Fremder kommt rein.</p>
+    </div>
+    <div class="panel-card">
+      <h3>Die Mechanik</h3>
+      <p>Jeder Char hat eine Versionsnummer wie ein AI-Model (V2.1, V3.6). Ersetzt, gebannt, gecuttet, rug-pulled. Andere Ären, andere Medien. Selber Raum.</p>
+    </div>
+    <div class="panel-card">
+      <h3>Der Style</h3>
+      <p>Mixed-Media. 2D-Cartoon neben Photoreal-AI-Mascot neben Claymation neben PS2-Low-Poly. Die visuelle Kollision IST die Story. MTV / Y2K / 90s vibe.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FORMAT / SENDETECHNIK -->
+<section id="format">
+  <div class="lower-third">
+    <span class="lt-tag">03 / SENDETECHNIK</span>
+    <span class="lt-title">BUILT FOR THE FEED</span>
+  </div>
+  <div class="panel-grid">
+    <div class="panel-card"><div class="big">2 min</div><div class="sub">Chinese Micro-Drama Format</div></div>
+    <div class="panel-card"><div class="big">TikTok · Shorts · Reels</div><div class="sub">Vertikal-native, scroll-friendly</div></div>
+    <div class="panel-card"><div class="big">12 Folgen</div><div class="sub">Ein Outsider pro Folge + Group Thread</div></div>
+    <div class="panel-card"><div class="big">AI-Native</div><div class="sub">Higgsfield character pipeline</div></div>
+  </div>
+</section>
+
+<!-- TEAM / PRODUKTION -->
+<section id="team">
+  <div class="lower-third">
+    <span class="lt-tag">04 / PRODUKTION</span>
+    <span class="lt-title">MADE BY TWO</span>
+  </div>
+  <div class="panel-grid">
+    <div class="panel-card"><div class="big">Bimurrrr</div><div class="sub">Visual / Direction · Berlin · Dreamworld</div></div>
+    <div class="panel-card"><div class="big">Finn Delius</div><div class="sub">Story / Concept · Storyboard, character lore</div></div>
+  </div>
+</section>
+
+<!-- FOOTER / TEST CARD -->
+<footer>
+  <div class="testcard">
+    <div class="bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <h2 class="signoff">SENDE<span class="glow">SCHLUSS</span></h2>
+    <div class="stamp osd">▣ FORTSETZUNG FOLGT · WINTER 2026 · CH-01</div>
+  </div>
+  <div class="footer-bottom">
+    <div class="credits">THE OUTSIDER(S) · 2026 · DREAMWORLD</div>
+    <div class="copy">v0.4 · subject to change · all characters are deprecated</div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modal-bg">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-img"><img id="modal-img" src="" alt=""></div>
+    <div class="modal-body">
+      <div class="num osd" id="modal-num"></div>
+      <h2 id="modal-name"></h2>
+      <div class="version-line" id="modal-version"></div>
+      <div class="style-label" id="modal-style"></div>
+      <div class="lore-label">▸ ORIGIN</div>
+      <div class="desc" id="modal-desc"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// live clock
+function tick(){
+  const d = new Date();
+  const p = n => String(n).padStart(2,'0');
+  const el = document.getElementById('clock');
+  if (el) el.textContent = `${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
+}
+setInterval(tick, 1000); tick();
+
+const CAST = [
+  { n:"01", name:"X-Rat", version:"", hideVersion:true, female:false,
+    style:"90s Skate Cartoon",
+    img:"cast/hf_20260531_125358_b2fb4655-da3d-4314-9739-772808bb373e.png",
+    desc:"Maskottchen der 2010er Porn-Streaming-Site „X-Rat” (X-Hamster-Klon). EU-Adult-Content-Regulation 2024 hat den Laden dichtgemacht. Hat alles gesehen, glaubt an nichts mehr. Riecht nach Latex und Zigarette. Paranoid, monoton, ghost-mode. Spricht zum ersten Mal am Ende von Episode 1." },
+
+  { n:"02", name:"Kawai", version:"V0.9", female:false,
+    style:"Photoreal Kaiju Suit",
+    img:"cast/hf_20260531_140207_9730fa7d-ae18-4678-b2ef-9a204d2e6cff.png",
+    desc:"1998 Tokyo-Streetfashion-Kampagne, nie gelauncht. Agency hat das Kind mitten im Shoot zurückgelassen. Trägt den Suit seit 28 Jahren. Weiß nicht mehr wie sein eigenes Gesicht aussieht. Spricht nur in Roar-Sounds, dann irgendwann in Whisper-Sätzen die alle aus der Fassung bringen." },
+
+  { n:"03", name:"Mr. Robinson", version:"V1.4", female:false,
+    style:"3D Hyperreal Uncanny",
+    img:"cast/mr_pem_v2.png",
+    desc:"Mr. Robinson. Tweed-Mascot einer britischen Luxury-Wool-Brand. 2019 „modernized” weg-rebrandet. Spricht von „früher als die Standards noch hoch waren”. Casual Klassismus. Vermisst das Empire, würde es nie zugeben. Sortiert die anderen Outsiders heimlich nach Akzent." },
+
+  { n:"04", name:"Chico", version:"V4.0", female:false,
+    style:"3D Hyperreal",
+    img:"cast/zayn_v2.png",
+    desc:"Mascot der 2021 Streetwear-Brand „ZAYN”, kollabiert nach 1 Drop. €40k Schulden auf 4 Kreditkarten, kauft trotzdem weiter. Trash-talkt Leute mit weniger Drip. Hat letzte Woche sein Auto für Hype-Sneaker verkauft. Spricht in TikTok-Sounds." },
+
+  { n:"05", name:"Truffl", version:"V1.3", female:false,
+    style:"Felt Hand Puppet",
+    img:"cast/hf_20260531_141847_2976d12e-4c69-4a05-835b-77450963dbb0-1.png",
+    desc:"1992 deutscher Kinderkanal-Sock-Puppet „Truffl in der Kiste”. Show nach 2 Staffeln gecancelt. Identifiziert sich vollständig mit der Rolle, spricht in dritter Person. Ist seit '94 nicht mehr aus dem Charakter ausgestiegen. Weiß nicht mehr wer er außerhalb von Truffl ist. Parasoziale Krise." },
+
+  { n:"06", name:"Schaumi", version:"V0.3", female:false,
+    style:"Plush Mascot Suit",
+    img:"cast/schaumi_v2.png",
+    desc:"Maskottchen einer süddeutschen Waschanlagen-Kette „Schaum & Glanz”. 2007 durch Logo ersetzt. Hat seitdem alles im Leben ans Glänzen optimiert: Looksmaxxing-Forum-Stamm-User, Mewing seit '21, Jaw-Workout mit Stoßstangen-Federn. Glaubt sein Comeback hängt von der V-Linie ab. Postet täglich Skin-Updates." },
+
+  { n:"07", name:"Fetch", version:"V1.1", female:false,
+    style:"Low-Poly 3D",
+    img:"cast/rover_v2.png",
+    desc:"Windows-ME-Search-Assistant. Microsoft hat ihn 2003 deprecated. Sucht noch immer nach Files die nicht existieren. Diagnose-Spektrum vermutlich autistisch, hyperfokussiert, kann nicht abschalten. Durchsucht jeden Stuhl, jede Tasche, jeden Mantel der Gruppe. Krampft wenn man ihn unterbricht." },
+
+  { n:"08", name:"Bobby Yellow", version:"V1.0", female:false,
+    style:"Plush Mascot Suit",
+    img:"cast/bobby_yellow_v2.png",
+    desc:"1986 Post-It-Marken-Pitch, nie ausgewählt. Schmiert sich täglich Notizen damit er weiß wer er ist. Hat 1994 mal kurz funktioniert, dann nie wieder. Ohne Brand keine Identität. Klebt im Stuhlkreis Erinnerungen an seinen eigenen Arm." },
+
+  { n:"09", name:"Cashy", version:"V0.7", female:false,
+    style:"PS2 Low-Poly 3D",
+    img:"cast/cashy_v2.png",
+    desc:"PS2-Arcade-Economy-Game „Cashy Run!”. Discontinued als die Arcades starben. Hat 2022 alles in eine Memecoin investiert, spricht nicht drüber. Erzählt stattdessen High Scores von '03. Daytrading-Group-Admin. Drei verlorene Wallets." },
+
+  { n:"10", name:"Purrz", version:"V0.5", female:true,
+    style:"Vintage Kawaii",
+    img:"cast/hf_20260531_205800_0216f71b-85e6-4fe0-9790-c2392c207d5f.png",
+    desc:"2009 Sanrio-Style Stationery-Mascot, nie released. „Permanent lächeln” war der Brand-Brief. Innerlich BPD-Mood-Swings, ED-Rückfälle, Glitzer-Sticker-Album als Coping. Bringt zu jedem Treffen ein „Geschenk” mit das sie selbst behält. Sammelt heimlich Wörter über sich." },
+
+  { n:"11", name:"Jojo", version:"V2.3", female:false,
+    style:"Vintage 60s Cartoon",
+    img:"cast/hf_20260531_205912_c1f90d69-251f-4e39-9499-0c6faaeea2c3.png",
+    desc:"1962 Belgisches Comic-Pilot „Jojo le petit”. Verlag pleite vor der ersten Auflage. Weiß bis heute nicht dass er nie gedruckt wurde. Permanente Dissoziation. Wenn jemand ihm die Wahrheit sagt, blendet er 4 Sekunden aus und vergisst alles. Lacht weiter." },
+
+  { n:"12", name:"Krazy", version:"V2.3", female:false,
+    style:"90s Hanna-Barbera",
+    img:"cast/hf_20260531_211512_51f105eb-b4bc-46d3-b0e5-201617f9b577.png",
+    desc:"1993 Saturday-Morning-Cartoon-Antagonist „Krazy & Co.”, mid-Season gecancelt wegen Gewaltdarstellung. Hat in der Pause politisch radikalisiert. Postet auf X über „die Eliten”, folgt 14 Andrew-Tate-Clipper-Accounts. Mood-Swings sekundengenau: brüllt → bricht in Tränen aus wenn ihn jemand kurz berührt → brüllt wieder. Ungetestet auf Allem." },
+
+  { n:"13", name:"Diabla", version:"V3.7", female:true,
+    style:"Claymation",
+    img:"cast/hf_20260531_212935_7aecbe7b-5937-472d-9ff6-ac5d7dc67b10.png",
+    desc:"Stop-Motion-Pilot „Diabla's Kitchen” für Adult Swim 2016, Studio pleite vor Air-Date. Hält die „Old Nick's”-Flasche wie Familie. AA-Dropout nach 3 Anläufen. Kocht nur noch betrunken. Spricht nie über die Clay-Kinder „in der anderen Schublade”. Bringt zur Selbsthilfegruppe immer einen „Cocktail für später” mit." },
+
+  { n:"14", name:"Onyx", version:"V1.0", female:true,
+    style:"Photoreal Editorial",
+    img:"cast/onyx_v3.png",
+    desc:"NFT-Mascot einer 2024 Crypto-Brand „PantherDAO”, rug-pulled nach $40M. Trägt noch immer den Designer-Puffer der nicht mehr passt. Verkauft Day-Trading-Courses in den DMs an 14-Jährige. Glaubt fest an den nächsten Bull Run. Hat letzte Woche ihre letzte Solana liquidet. Das Chihuahua gehört eigentlich gar nicht ihr." },
+
+  { n:"15", name:"Bunny & Angel", version:"V2.0 + V1.8", female:true, couple:true,
+    style:"Y2K Bratz Doll Duo",
+    img:"cast/bunny_angel_v4.png",
+    desc:"BUNNY: 2003 Limited-Bratz „Bunny Brat” Sommer-Drop, eingestampft wegen „inappropriate doll posing”. ANGEL: 2005 Y2K-Tween-Lipgloss-Mascot „Angel Glitter”, Marke pleite nach FDA-Klage über glitzernde Mikropartikel. Seit '04 codependent toxic. Bunny ist die Brat (laut, slutty, wirft Drinks), Angel ist die Faux-Sweet (passiv-aggressiv, smiled-while-stabbing). Niemand erinnert sich an eine ohne die andere. Beide voll operiert: BBL, Lip-Filler, Botox seit 19. Kommen Hand in Hand zur Gruppe und gehen Hand in Hand zur Klinik." },
+
+  { n:"16", name:"Bobby Girl", version:"V1.0", female:true,
+    style:"Vintage 50s Cartoon",
+    img:"cast/hf_20260531_213720_938a1d03-ad5e-47e7-a4f8-a8015259902f.png",
+    desc:"Bobby-Familie, 1956 Diner-Pitch. Nie ausgewählt. Hat 70 Jahre damit verbracht für Bobby Yellow zu sprechen. People-Pleaser-Burnout. Lächelt seit Dekaden. Wenn niemand hinschaut, fällt das Lächeln 2 Sekunden, dann ist es wieder da." },
+
+  { n:"17", name:"Spanky", version:"V1.9", female:false,
+    style:"AI-Warped",
+    img:"cast/spanky.png",
+    desc:"Maskottchen eines früh-2000er Energy-Drinks „Jolt-X” (Crazy-Frog-Ära, Ringtone-Cross-Promo). Nach dem letzten Werbespot 2004 nie wieder runtergekommen. Permanente Koffein-Psychose, Kiefer-Tics, Aggression aus dem Nichts. Redet 200 Wörter die Minute, hört keinem zu, explodiert wenn die alte Werbemelodie irgendwo läuft. Entzug seit 22 Jahren." },
+
+  { n:"18", name:"Baby Bizz", version:"V0.4", female:false,
+    style:"Daz3D Y2K Render",
+    img:"cast/baby_bizz.png",
+    desc:"Früher AI-Customer-Service-Avatar einer pleite-gegangenen Neobank „Bluebird” (2019). „Hello! Wie kann ich helfen?” — fest einprogrammiert, kann nicht aufhören zu lächeln, selbst wenn er innerlich weint. Wurde durch einen Text-Chatbot ersetzt der billiger war. Versteht bis heute nicht, warum niemand mehr seine Hilfe will. Leere, freundliche Augen." },
+
+  { n:"19", name:"Franky Deaky Joe", version:"V2.0", female:false,
+    style:"Hyperreal Resin Toy",
+    img:"cast/franky_deaky_joe.png",
+    desc:"Mascot einer frühen Shock-Content-Plattform „Rawfeed” (Vine-Ära). Provoziert nur, um gecancelt zu werden — Cancellation = Aufmerksamkeit = Existenz. Seit die Plattform 2017 dichtmachte, filmt er ins Leere, niemand schaut mehr zu. Hält den Camcorder wie eine Lebenserhaltungsmaschine. Sucht den einen Skandal, der ihn zurückbringt." },
+];
+
+// Shuffle: bei jedem Reload andere Reihenfolge (Fisher-Yates)
+function shuffle(arr) {
+  const r = arr.slice();
+  for (let i = r.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [r[i], r[j]] = [r[j], r[i]];
+  }
+  return r;
+}
+const CAST_FINAL = shuffle(CAST);
+
+// Render
+const grid = document.getElementById("cast-grid");
+CAST_FINAL.forEach(c => {
+  const el = document.createElement("div");
+  el.className = "char" + (c.female ? " female" : " male") + (c.couple ? " couple" : "");
+  el.innerHTML = `
+    <div class="char-img-wrap">
+      <div class="char-corner">${c.n}</div>
+      ${c.couple ? '<div class="duo">DUO</div>' : ''}
+      <img src="${c.img}" alt="${c.name}" loading="lazy">
+    </div>
+    <div class="char-meta">
+      <div class="char-name">${c.name}</div>
+      <div class="char-meta-row">
+        ${c.hideVersion ? '<div class="char-version">OG</div>' : `<div class="char-version">${c.version}</div>`}
+        <div class="char-style">${c.style}</div>
+      </div>
+    </div>
+  `;
+  el.addEventListener("click", () => openModal(c));
+  grid.appendChild(el);
+});
+
+const modalBg = document.getElementById("modal-bg");
+function openModal(c) {
+  document.getElementById("modal-img").src = c.img;
+  document.getElementById("modal-num").textContent = `CH ${c.n} · OUTSIDER`;
+  document.getElementById("modal-name").textContent = c.name;
+  document.getElementById("modal-version").textContent = c.hideVersion
+    ? (c.female ? "♀" : "♂")
+    : `Version ${c.version}${c.female ? " · ♀" : " · ♂"}${c.couple ? " · DUO" : ""}`;
+  document.getElementById("modal-style").textContent = c.style;
+  document.getElementById("modal-desc").textContent = c.desc;
+  modalBg.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function closeModal() {
+  modalBg.classList.remove("open");
+  document.body.style.overflow = "";
+}
+modalBg.addEventListener("click", e => { if (e.target === modalBg) closeModal(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
+</script>
+
+</body>
+</html>
