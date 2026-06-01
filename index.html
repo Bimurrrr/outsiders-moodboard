@@ -786,7 +786,7 @@ const CAST = [
 
   { n:"15", name:"Bunny & Angel", version:"V2.0 + V1.8", female:true, couple:true,
     style:"Y2K Bratz Doll Duo",
-    img:"cast/bunny_angel_v3.png",
+    img:"cast/bunny_angel_v4.png",
     desc:"BUNNY: 2003 Limited-Bratz „Bunny Brat” Sommer-Drop, eingestampft wegen „inappropriate doll posing”. ANGEL: 2005 Y2K-Tween-Lipgloss-Mascot „Angel Glitter”, Marke pleite nach FDA-Klage über glitzernde Mikropartikel. Seit '04 codependent toxic. Bunny ist die Brat (laut, slutty, wirft Drinks), Angel ist die Faux-Sweet (passiv-aggressiv, smiled-while-stabbing). Niemand erinnert sich an eine ohne die andere. Beide voll operiert: BBL, Lip-Filler, Botox seit 19. Kommen Hand in Hand zur Gruppe und gehen Hand in Hand zur Klinik." },
 
   { n:"16", name:"Bobby Girl", version:"V1.0", female:true,
@@ -810,7 +810,16 @@ const CAST = [
     desc:"Mascot einer frühen Shock-Content-Plattform „Rawfeed” (Vine-Ära). Provoziert nur, um gecancelt zu werden — Cancellation = Aufmerksamkeit = Existenz. Seit die Plattform 2017 dichtmachte, filmt er ins Leere, niemand schaut mehr zu. Hält den Camcorder wie eine Lebenserhaltungsmaschine. Sucht den einen Skandal, der ihn zurückbringt." },
 ];
 
-const CAST_FINAL = CAST;
+// Shuffle: bei jedem Reload andere Reihenfolge (Fisher-Yates)
+function shuffle(arr) {
+  const r = arr.slice();
+  for (let i = r.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [r[i], r[j]] = [r[j], r[i]];
+  }
+  return r;
+}
+const CAST_FINAL = shuffle(CAST);
 
 // Render
 const grid = document.getElementById("cast-grid");
