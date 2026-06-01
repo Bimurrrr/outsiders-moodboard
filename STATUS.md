@@ -20,26 +20,33 @@
 **Episode 1:** Selbsthilfegruppen-Treffen, ein Fremder kommt rein
 **Premiere:** Winter 2026
 
-## Cast — 16 Outsiders
+## Cast — 19 Outsiders
+
+✓ = neuer Style live · ⚠ = noch alter Style, redo offen
 
 | # | Name | Style | Trauma |
 |---|------|-------|--------|
 | 01 | X-Rat 🔒 | 90s Skate Cartoon (Master, locked) | Porn-Site-Mascot (X-Hamster-Parodie), EU-Bann 2024 |
-| 02 | Kawai | Photoreal Kaiju Suit | Tokyo-Streetfashion-Pilot, nie ausgezogen |
-| 03 | Mr. Pem | Photoreal AI Editorial ⚠ | Britischer Luxury-Wool, casual Klassismus, Empire-Trauer |
-| 04 | Zayn | Photoreal AI Editorial ⚠ | Streetwear-Brand pleite, €40k Schulden, Consumerism |
-| 05 | Truffl | Felt Sock Puppet | Kinder-TV gecancelt, parasoziale Krise |
+| 02 | Kawai | Photoreal Kaiju Suit ⚠ | Tokyo-Streetfashion-Pilot, nie ausgezogen |
+| 03 | Mr. Pem ✓ | 3D Hyperreal Uncanny (anthro-cat tweed) | Britischer Luxury-Wool, casual Klassismus, Empire-Trauer |
+| 04 | Zayn ✓ | 3D Hyperreal (ZAYN the Chimp, Streetwear) | Streetwear-Brand pleite, €40k Schulden, Consumerism |
+| 05 | Truffl | Felt Sock Puppet ⚠ | Kinder-TV gecancelt, parasoziale Krise |
 | 06 | Schaumi ✓ | Plush Mascot Suit (v2) | Waschanlagen-Mascot, Looksmaxxing-Stamm |
-| 07 | Rover | Retro 8-Bit Pixel | Win-ME-Search-Agent, Spektrum/OCD |
+| 07 | Rover ✓ | Low-Poly 3D (red search-dog) | Win-ME-Search-Agent, Spektrum/OCD |
 | 08 | Bobby Yellow ✓ | Plush Mascot Suit (v2) | Post-It-Pitch, identity-loss |
-| 09 | Cashy | PS2 Low-Poly 3D | Arcade-Game discontinued, Memecoin-Crash |
-| 10 | Purrz | Vintage Kawaii | Sanrio-Style, BPD, ED, permanent-lächeln-Trauma |
-| 11 | Marso | Vintage 60s Cartoon | Belgisches Comic-Pilot, Dissoziation |
-| 12 | Krazy | 90s Hanna-Barbera | Cancelled Antagonist, Tate-radicalized, Wut-Tränen |
-| 13 | Diabla | Claymation | Adult-Swim-Pilot, Alkoholismus, AA-Dropout |
+| 09 | Cashy | PS2 Low-Poly 3D ⚠ | Arcade-Game discontinued, Memecoin-Crash |
+| 10 | Purrz | Vintage Kawaii ⚠ | Sanrio-Style, BPD, ED, permanent-lächeln-Trauma |
+| 11 | Marso | Vintage 60s Cartoon ⚠ | Belgisches Comic-Pilot, Dissoziation |
+| 12 | Krazy | 90s Hanna-Barbera ⚠ | Cancelled Antagonist, Tate-radicalized, Wut-Tränen |
+| 13 | Diabla | Claymation ⚠ | Adult-Swim-Pilot, Alkoholismus, AA-Dropout |
 | 14 | Onyx ✓ | 3D Toy Sculpt (v2) | Crypto-NFT-Mascot, rug-pulled, Day-Trading-Grooming |
-| 15 | Bunny & Angel ✓ | Y2K Bratz Doll Duo (v2) | Codependent toxic Y2K-clinic-couple seit 2004 (vorher: Zelma & Zimmer) |
-| 16 | Bobby Girl | Vintage 50s Cartoon | Bobby-Family, People-Pleaser-Burnout |
+| 15 | Bunny & Angel ✓ | Y2K Bratz Doll Duo (v3) | Codependent toxic Y2K-clinic-couple seit 2004 (vorher: Zelma & Zimmer) |
+| 16 | Bobby Girl | Vintage 50s Cartoon ⚠ | Bobby-Family, People-Pleaser-Burnout |
+| 17 | Spanky ✓ 🆕 | AI-Warped | Energy-Drink-Mascot „Jolt-X", Koffein-Psychose, Entzug seit 22 J. |
+| 18 | Baby Bizz ✓ 🆕 | Daz3D Y2K Render | Gescheiterter Neobank-AI-Avatar „Bluebird", permanent-lächeln, durch Chatbot ersetzt |
+| 19 | Franky Deaky Joe ✓ 🆕 | Hyperreal Resin Toy | Shock-Content-Mascot „Rawfeed", will gecancelt werden = Existenz, filmt ins Leere |
+
+**Offen-Onyx:** bessere Panther-Moncler-Version (schwarzer Bob, teal BG) liegt nur als Chat-Bild vor — File auf Desktop ziehen, dann swap. Aktuell ältere Panther-Version live.
 
 ## Style-DNA (User-validated)
 
