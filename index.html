@@ -889,11 +889,12 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal()
 </script>
 
 <!-- Hidden background theme: MSI – Never Wanted To Dance. Startet bei der ersten Nutzer-Geste (Browser-Autoplay-Sperre). -->
-<div id="yt-bg" aria-hidden="true" style="position:fixed;left:-9999px;top:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;"></div>
+<div id="yt-bg-wrap" aria-hidden="true" style="position:fixed;bottom:0;right:0;width:1px;height:1px;overflow:hidden;opacity:0.01;pointer-events:none;z-index:0;"><div id="yt-bg"></div></div>
 <script>
   var ytBg, ytBgStarted = false;
   window.onYouTubeIframeAPIReady = function () {
     ytBg = new YT.Player('yt-bg', {
+      width: '320', height: '180',
       videoId: 'UR0UkTiKxmc',
       playerVars: { autoplay: 0, controls: 0, disablekb: 1, loop: 1, playlist: 'UR0UkTiKxmc', playsinline: 1 }
     });
@@ -901,6 +902,7 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal()
   function startBgMusic() {
     if (ytBgStarted || !ytBg || typeof ytBg.playVideo !== 'function') return;
     ytBgStarted = true;
+    try { ytBg.unMute(); ytBg.setVolume(75); } catch (e) {}
     ytBg.playVideo();
   }
   ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function (ev) {
