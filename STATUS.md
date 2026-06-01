@@ -38,7 +38,7 @@
 | 12 | Krazy | 90s Hanna-Barbera | Cancelled Antagonist, Tate-radicalized, Wut-Tränen |
 | 13 | Diabla | Claymation | Adult-Swim-Pilot, Alkoholismus, AA-Dropout |
 | 14 | Onyx ✓ | 3D Toy Sculpt (v2) | Crypto-NFT-Mascot, rug-pulled, Day-Trading-Grooming |
-| 15 | Zelma & Zimmer ✓ | Y2K Bratz Doll Duo (v2) | Codependent toxic couple seit 2004 |
+| 15 | Bunny & Angel ✓ | Y2K Bratz Doll Duo (v2) | Codependent toxic Y2K-clinic-couple seit 2004 (vorher: Zelma & Zimmer) |
 | 16 | Bobby Girl | Vintage 50s Cartoon | Bobby-Family, People-Pleaser-Burnout |
 
 ## Style-DNA (User-validated)
@@ -55,19 +55,25 @@
 - ✅ **Bobby Yellow** → Plush Mascot Suit (gelb/rot/blau, fleece + visible stitching, embroidered face)
 - ✅ **Schaumi** → Plush Mascot Suit (cloud-shape, iridescent foam, embroidered chiseled Looksmaxxing-face mit Mewing-Posture)
 - ✅ **Onyx** → 3D Toy Sculpt (Panther-Kopf + humanoider Körper, weißer Puffer, hält Chihuahua, glossy plastic surface)
-- ✅ **Zelma & Zimmer** → Y2K Bratz Doll Duo v2 (BRAT + ANGEL tees, butterfly-cargo-jeans, codependent body language, lavender BG)
+- ✅ **Bunny & Angel** (vorher Zelma & Zimmer) → Y2K Bratz Doll Duo v2 (BRAT + ANGEL tees, butterfly-cargo-jeans, codependent body language, lavender BG). Geplant V4: operiert+nuttig in Style A (Charlie-Eth-Hall)
 
 **Still offen — gleiche Style-Logik anwenden:**
 - 🔴 **Mr. Pem** → Wax-Figure-Uncanny (Madame-Tussauds, leicht schmelzend, britisch-aristokrat, „CANCEL ME"-Energy)
 - 🔴 **Zayn** → 3D Toy Sculpt (Bear-Streetwear-Toy, hält Invoices + maxed credit card, bankrupt-eyes)
 
-**Confirmed Style-Map:**
-- **STYLE A — Plush Mascot Suit:** Fleece-Stoff, sichtbare Naht-Stitches, gestickte Gesichts-Features, Pastell-BG, Studio-Product-Light. Funktioniert für: Bobby Yellow, Schaumi.
-- **STYLE B — 3D Toy Sculpt:** Anthropomorpher Tier-Kopf + humanoider Körper, moderne Streetwear, glatte 3D-Plastik-Oberfläche, leichte Karikatur, Pastell-BG. Funktioniert für: Onyx. Geplant für: Zayn.
-- **STYLE C — Y2K Bratz Doll:** Glossy plastic Bratz-Proportionen, lippenbeißt anime-eyes, 2004-Outfit. Funktioniert für: Zelma & Zimmer.
-- **STYLE D — Wax-Figure-Uncanny:** Madame-Tussauds-Wachs, leichter Schmelz, Museumslicht. Geplant für: Mr. Pem.
+**Final Style-Vokabular (A-E) — Stand 2026-06-01 abends, nach tough.574-Refs:**
 
-**Prompts für Mr. Pem + Zayn** stehen ausformuliert im Chat (2026-06-01).
+Regeln für alle: **immer einfarbiger BG** (Ausnahme Style D = real-footage). **Animation-Style ist Haupt-Treiber**, Char ist Beilage. **Anti-Spec ist Pflicht** in jedem Prompt.
+
+- **STYLE A — Charlie-Eth-Hall AI-Warped Photo-Composite:** 3D-Head auf Photo-Body, hyperreal-skin-shader, sichtbare Naht. Predecessors: Liquid Television, Wonder Showzen, @charlieethall. Anti: NOT smooth CGI, NOT cartoon. → für: **Zayn, Bunny & Angel** (V4)
+- **STYLE B — Raw Aardman Plasticine-Grotesque:** echte physische Clay-Sculpture, Fingerabdrücke sichtbar, raw plasticine. Predecessors: Creature Comforts, Wallace & Gromit, Tim Burton. Anti: NOT digital claymation. → für: **Mr. Pem, Diabla, Krazy, Marso** (V4)
+- **STYLE C — Stop-Motion Felt-Mascot-Puppet:** echtes Felt+Fleece Puppet, Stitches sichtbar, gestickte Features. Predecessors: McD-stop-motion-ads, Laika, Sesame Workshop. Anti: NOT plush-toy CGI. → für: **Bobby Yellow ✓, Schaumi ✓, Kawai, Truffl** (V4)
+- **STYLE D — Low-Fi 3D auf Real-Footage:** Roblox/PS1-Polycount-Char composited auf echtem Handy-Foto. Predecessors: Adult Swim Off The Air, tough.574, Skibidi Toilet. Anti: NOT clean render. **Ausnahme von einfarbig-BG-Regel** weil Real-Footage Teil des Looks ist. → für: **Cashy, Rover**
+- **STYLE E — Daz3D Y2K-Cursed-Render:** Daz-Genesis-Mesh mit hyperreal skin auf simple proportions, default 3DS-Max-Light. Predecessors: tough.574, Renderosity 2005, Vine 3D memes. Anti: NOT MetaHuman, NOT Pixar. → für: **Purrz, Bobby Girl**
+
+**Style-Verteilung Final (16 Chars):** A=2, B=4, C=4, D=2, E=2, locked=1, schon-fertig=3 (Onyx Toy-Sculpt v1, Bobby Yellow C ✓, Schaumi C ✓).
+
+**Style-Snippets als copy-paste-Module** stehen im Chat (Block #26, 2026-06-01).
 
 ### Andere offene Punkte
 
