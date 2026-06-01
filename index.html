@@ -609,10 +609,6 @@
   <button class="hero-cta" onclick="document.getElementById('cast').scrollIntoView()">
     Meet the Cast
   </button>
-  <div class="theme-player">
-    <div class="tp-label">▶ Theme — Mindless Self Indulgence · „Never Wanted To Dance”</div>
-    <iframe src="https://open.spotify.com/embed/track/4pMhDtu7knEIb1XUooUbhx?utm_source=generator" width="100%" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-  </div>
 </header>
 
 <!-- MARQUEE 1 -->
@@ -890,6 +886,31 @@ function closeModal() {
 }
 modalBg.addEventListener("click", e => { if (e.target === modalBg) closeModal(); });
 document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
+</script>
+
+<!-- Hidden background theme: MSI – Never Wanted To Dance. Startet bei der ersten Nutzer-Geste (Browser-Autoplay-Sperre). -->
+<div id="yt-bg" aria-hidden="true" style="position:fixed;left:-9999px;top:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;"></div>
+<script>
+  var ytBg, ytBgStarted = false;
+  window.onYouTubeIframeAPIReady = function () {
+    ytBg = new YT.Player('yt-bg', {
+      videoId: 'UR0UkTiKxmc',
+      playerVars: { autoplay: 0, controls: 0, disablekb: 1, loop: 1, playlist: 'UR0UkTiKxmc', playsinline: 1 }
+    });
+  };
+  function startBgMusic() {
+    if (ytBgStarted || !ytBg || typeof ytBg.playVideo !== 'function') return;
+    ytBgStarted = true;
+    ytBg.playVideo();
+  }
+  ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function (ev) {
+    document.addEventListener(ev, startBgMusic, { passive: true });
+  });
+  (function () {
+    var t = document.createElement('script');
+    t.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(t);
+  })();
 </script>
 
 </body>
