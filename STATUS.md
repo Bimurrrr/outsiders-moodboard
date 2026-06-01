@@ -29,14 +29,14 @@
 | 01 | X-Rat 🔒 | 90s Skate Cartoon (Master, locked) | Porn-Site-Mascot (X-Hamster-Parodie), EU-Bann 2024 |
 | 02 | Kawai | Photoreal Kaiju Suit ⚠ | Tokyo-Streetfashion-Pilot, nie ausgezogen |
 | 03 | Mr. Pem ✓ | 3D Hyperreal Uncanny (anthro-cat tweed) | Britischer Luxury-Wool, casual Klassismus, Empire-Trauer |
-| 04 | Zayn ✓ | 3D Hyperreal (ZAYN the Chimp, Streetwear) | Streetwear-Brand pleite, €40k Schulden, Consumerism |
+| 04 | Chico ✓ | 3D Hyperreal (ZAYN-Chimp, Streetwear) | Streetwear-Brand pleite, €40k Schulden, Consumerism (vorher: Zayn) |
 | 05 | Truffl | Felt Sock Puppet ⚠ | Kinder-TV gecancelt, parasoziale Krise |
 | 06 | Schaumi ✓ | Plush Mascot Suit (v2) | Waschanlagen-Mascot, Looksmaxxing-Stamm |
-| 07 | Rover ✓ | Low-Poly 3D (red search-dog) | Win-ME-Search-Agent, Spektrum/OCD |
+| 07 | Fetch ✓ | Low-Poly 3D (red search-dog) | Win-ME-Search-Agent, Spektrum/OCD (vorher: Rover) |
 | 08 | Bobby Yellow ✓ | Plush Mascot Suit (v2) | Post-It-Pitch, identity-loss |
 | 09 | Cashy | PS2 Low-Poly 3D ⚠ | Arcade-Game discontinued, Memecoin-Crash |
 | 10 | Purrz | Vintage Kawaii ⚠ | Sanrio-Style, BPD, ED, permanent-lächeln-Trauma |
-| 11 | Marso | Vintage 60s Cartoon ⚠ | Belgisches Comic-Pilot, Dissoziation |
+| 11 | Jojo | Vintage 60s Cartoon ⚠ | Belgisches Comic-Pilot, Dissoziation (vorher: Marso; Style→B Aardman geplant) |
 | 12 | Krazy | 90s Hanna-Barbera ⚠ | Cancelled Antagonist, Tate-radicalized, Wut-Tränen |
 | 13 | Diabla | Claymation ⚠ | Adult-Swim-Pilot, Alkoholismus, AA-Dropout |
 | 14 | Onyx ✓ | 3D Toy Sculpt (v2) | Crypto-NFT-Mascot, rug-pulled, Day-Trading-Grooming |
