@@ -269,7 +269,14 @@
     background: var(--card);
     overflow: hidden;
     border-radius: 10px;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12);
   }
+  .char-img-wrap::after {
+    content: ""; position: absolute; inset: 0; z-index: 4; pointer-events: none;
+    background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,0.20) 48%, transparent 62%);
+    transform: translateX(-130%); transition: transform 0.65s ease;
+  }
+  .char:hover .char-img-wrap::after { transform: translateX(130%); }
   .char img {
     width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block;
     background: var(--card);
@@ -287,9 +294,11 @@
     font-size: 18px;
     line-height: 1.1;
     letter-spacing: 0.01em;
-    z-index: 2;
+    z-index: 6;
     box-shadow: 0 2px 8px rgba(0,0,0,0.45);
+    border: 1px solid rgba(255,255,255,0.1);
   }
+  .char-corner .hash { font-size: 0.6em; color: var(--pink); vertical-align: 0.14em; margin-right: 1px; }
   .char-meta {
     padding: 13px 8px 15px;
   }
@@ -303,9 +312,11 @@
   }
   .char-meta-row {
     display: flex; justify-content: space-between; align-items: center; gap: 8px;
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: 1px dashed var(--line);
+    margin-top: 11px;
+    padding: 8px 10px;
+    background: rgba(0,0,0,0.25);
+    border: 1px solid var(--line);
+    border-radius: 8px;
   }
   .char-version {
     font-family: "JetBrains Mono", monospace;
@@ -857,7 +868,7 @@ CAST_FINAL.forEach(c => {
   el.className = "char" + (c.female ? " female" : " male") + (c.couple ? " couple" : "");
   el.innerHTML = `
     <div class="char-img-wrap">
-      <div class="char-corner">${c.n}</div>
+      <div class="char-corner"><span class="hash">#</span>${c.n}</div>
       <img src="${c.img}" alt="${c.name}" loading="lazy">
     </div>
     <div class="char-meta">
