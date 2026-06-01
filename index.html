@@ -901,30 +901,36 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal()
 <div id="yt-bg-wrap" aria-hidden="true" style="position:fixed;bottom:0;right:0;width:1px;height:1px;overflow:hidden;opacity:0.01;pointer-events:none;z-index:0;"><div id="yt-bg"></div></div>
 <button id="sound-btn" class="sound-btn muted" aria-label="Theme-Musik an/aus" title="Theme an/aus"><span></span><span></span><span></span></button>
 <script>
-  var ytBg, ytReady = false, musicOn = false, started = false, pendingStart = false;
+  var ytBg, ytReady = false, musicOn = false, userMuted = false, unmutedOnce = false;
   window.onYouTubeIframeAPIReady = function () {
     ytBg = new YT.Player('yt-bg', {
       width: '320', height: '180',
       videoId: 'UR0UkTiKxmc',
-      playerVars: { autoplay: 0, controls: 0, disablekb: 1, loop: 1, playlist: 'UR0UkTiKxmc', playsinline: 1 },
-      events: { onReady: function () { ytReady = true; if (pendingStart) musicPlay(); } }
+      playerVars: { autoplay: 1, mute: 1, controls: 0, disablekb: 1, loop: 1, playlist: 'UR0UkTiKxmc', playsinline: 1 },
+      events: { onReady: function () {
+        ytReady = true;
+        try { ytBg.mute(); ytBg.playVideo(); } catch (e) {}   // muted autoplay — vom Browser erlaubt
+      } }
     });
   };
   function reflectBtn() { var b = document.getElementById('sound-btn'); if (b) b.classList.toggle('muted', !musicOn); }
-  function musicPlay() {
-    started = true; musicOn = true; reflectBtn();
-    if (!ytReady) { pendingStart = true; return; }
-    try { ytBg.unMute(); ytBg.setVolume(75); } catch (e) {}
-    ytBg.playVideo();
+  function soundOn() {
+    musicOn = true; userMuted = false; unmutedOnce = true; reflectBtn();
+    if (!ytReady) return;
+    try { ytBg.unMute(); ytBg.setVolume(75); ytBg.playVideo(); } catch (e) {}
   }
-  function musicPause() { musicOn = false; reflectBtn(); if (ytReady) ytBg.pauseVideo(); }
-  function firstGesture() { if (!started) musicPlay(); }
+  function soundOff() {
+    musicOn = false; userMuted = true; reflectBtn();
+    if (ytReady) { try { ytBg.pauseVideo(); } catch (e) {} }
+  }
+  // erste Geste irgendwo → Ton dazu (sofern nicht aktiv stummgeschaltet)
+  function firstGesture() { if (!unmutedOnce && !userMuted) soundOn(); }
   ['pointerdown', 'keydown', 'scroll'].forEach(function (ev) {
     document.addEventListener(ev, firstGesture, { passive: true });
   });
   (function () {
     var b = document.getElementById('sound-btn');
-    if (b) b.addEventListener('pointerdown', function (e) { e.stopPropagation(); started = true; musicOn ? musicPause() : musicPlay(); });
+    if (b) b.addEventListener('pointerdown', function (e) { e.stopPropagation(); musicOn ? soundOff() : soundOn(); });
     var t = document.createElement('script');
     t.src = 'https://www.youtube.com/iframe_api';
     document.head.appendChild(t);
