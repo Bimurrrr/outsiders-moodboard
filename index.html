@@ -53,19 +53,23 @@
     color: var(--fg);
     text-transform: uppercase;
   }
-  nav .brand-mini::before {
-    content: "▸ ";
-    color: var(--pink);
-    margin-right: 2px;
-  }
-  nav .links { display: flex; gap: 26px; }
+  nav .links { display: flex; gap: 30px; }
   nav a {
-    color: var(--fg); text-decoration: none; font-size: 12px;
-    text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700;
-    font-family: "Inter", sans-serif;
-    transition: color 0.12s;
+    position: relative;
+    color: var(--muted); text-decoration: none; font-size: 12px;
+    text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700;
+    font-family: "JetBrains Mono", monospace;
+    padding: 4px 0;
+    transition: color 0.18s;
   }
-  nav a:hover { color: var(--pink); }
+  nav a::after {
+    content: ""; position: absolute; left: 0; bottom: -1px;
+    width: 100%; height: 2px; background: var(--pink);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.24s cubic-bezier(.2,.7,.2,1);
+  }
+  nav a:hover { color: var(--fg); }
+  nav a:hover::after { transform: scaleX(1); }
   nav .premiere {
     background: var(--pink);
     color: var(--bg);
@@ -185,6 +189,13 @@
     border-top: 9px solid transparent; border-bottom: 9px solid transparent;
     transition: border-left-color 0.12s;
   }
+  .theme-player { margin-top: 34px; width: 100%; max-width: 440px; }
+  .theme-player .tp-label {
+    font-family: "JetBrains Mono", monospace; font-size: 11px;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--bg);
+    font-weight: 700; margin-bottom: 10px;
+  }
+  .theme-player iframe { border-radius: 12px; display: block; width: 100%; border: 0; }
 
   /* ───── SECTION ───── */
   section { padding: 80px 24px; max-width: 1600px; margin: 0 auto; }
@@ -387,8 +398,8 @@
   .modal-bg.open { display: flex; }
   .modal {
     background: var(--card);
-    border: 3px solid var(--pink);
-    box-shadow: 12px 12px 0 var(--pink);
+    border: 1px solid var(--line);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6);
     max-width: 1000px; width: 100%; max-height: 90vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -407,10 +418,11 @@
     font-weight: 700;
   }
   .modal-body h2 {
-    font-family: "Bowlby One", system-ui;
-    font-size: 44px; line-height: 1;
-    color: var(--yellow);
-    text-shadow: 3px 3px 0 var(--pink);
+    font-family: "Anton", system-ui;
+    font-size: 46px; line-height: 1;
+    color: var(--fg);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
   }
   .modal-body .version-line {
     font-family: "JetBrains Mono", monospace;
@@ -583,7 +595,6 @@
 
 <!-- HERO -->
 <header class="hero">
-  <div class="hero-tag">▸ COMING WINTER 2026</div>
   <img src="logo.png" class="hero-logo-img" alt="THE OUTSIDERS">
   <p class="hero-subtitle">
     Eine Serie über deprecated AI-Mascots, die in der Selbsthilfegruppe
@@ -592,12 +603,16 @@
   <div class="hero-meta">
     <span><strong>18</strong> · Outsiders</span>
     <span>Mixed Media</span>
-    <span>2-min Episodes</span>
-    <span>Vertikal</span>
+    <span>2–5 Min</span>
+    <span>Querformat</span>
   </div>
   <button class="hero-cta" onclick="document.getElementById('cast').scrollIntoView()">
     Meet the Cast
   </button>
+  <div class="theme-player">
+    <div class="tp-label">▶ Theme — Mindless Self Indulgence · „Never Wanted To Dance”</div>
+    <iframe src="https://open.spotify.com/embed/track/4pMhDtu7knEIb1XUooUbhx?utm_source=generator" width="100%" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+  </div>
 </header>
 
 <!-- MARQUEE 1 -->
@@ -658,18 +673,18 @@
 <section id="format">
   <div class="section-head">
     <div class="section-num">03 / FORMAT</div>
-    <h2 class="section-title">BUILT FOR THE FEED</h2>
+    <h2 class="section-title">MADE FOR YOUTUBE</h2>
   </div>
   <div class="format-row">
     <div class="format-item">
       <div class="label">Episode Length</div>
-      <div class="value">2 min</div>
-      <div class="sub">Chinese Micro-Drama Format</div>
+      <div class="value">2–5 min</div>
+      <div class="sub">Pro Folge</div>
     </div>
     <div class="format-item">
       <div class="label">Distribution</div>
-      <div class="value">TikTok · Shorts · Reels</div>
-      <div class="sub">Vertikal-native, scroll-friendly</div>
+      <div class="value">YouTube</div>
+      <div class="sub">Querformat · 16:9</div>
     </div>
     <div class="format-item">
       <div class="label">Season 1</div>
@@ -693,7 +708,7 @@
   <div class="format-row">
     <div class="format-item">
       <div class="label">Visual / Direction</div>
-      <div class="value">Bimurrrr</div>
+      <div class="value">Timur Akyol</div>
       <div class="sub">Berlin · Dreamworld</div>
     </div>
     <div class="format-item">
