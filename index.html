@@ -298,17 +298,19 @@
     box-shadow: 0 2px 8px rgba(0,0,0,0.45);
     border: 1px solid rgba(255,255,255,0.1);
   }
-  .char-corner .hash { font-size: 0.6em; color: var(--pink); vertical-align: 0.14em; margin-right: 1px; }
+  .char-corner .hash { font-size: 0.72em; color: var(--pink); vertical-align: 0.1em; margin-right: 1px; }
   .char-meta {
     padding: 13px 8px 15px;
   }
   .char-name {
     font-family: "Archivo Black", sans-serif;
-    font-size: 22px; letter-spacing: -0.02em;
-    margin: 0 0 4px;
+    font-size: 17px; letter-spacing: -0.03em;
+    margin: 0;
     color: var(--fg);
     text-transform: uppercase;
-    line-height: 1;
+    line-height: 1.15;
+    min-height: 2.3em;
+    display: flex; align-items: flex-start;
   }
   .char-meta-row {
     display: flex; justify-content: space-between; align-items: center; gap: 8px;
@@ -824,7 +826,7 @@ const CAST = [
     img:"cast/onyx_v3.png",
     desc:"NFT-Mascot einer 2024 Crypto-Brand „PantherDAO”, rug-pulled nach $40M. Trägt noch immer den Designer-Puffer der nicht mehr passt. Verkauft Day-Trading-Courses in den DMs an 14-Jährige. Glaubt fest an den nächsten Bull Run. Hat letzte Woche ihre letzte Solana liquidet. Das Chihuahua gehört eigentlich gar nicht ihr." },
 
-  { n:"14", name:"Bunny & Angel", version:"V2.0 + V1.8", female:true, couple:true,
+  { n:"14", name:"Bunny & Angel", version:"V2.0", female:true, couple:true,
     style:"Y2K Bratz Doll Duo",
     img:"cast/bunny_angel_v4.png",
     desc:"BUNNY: 2003 Limited-Bratz „Bunny Brat” Sommer-Drop, eingestampft wegen „inappropriate doll posing”. ANGEL: 2005 Y2K-Tween-Lipgloss-Mascot „Angel Glitter”, Marke pleite nach FDA-Klage über glitzernde Mikropartikel. Seit '04 codependent toxic. Bunny ist die Brat (laut, slutty, wirft Drinks), Angel ist die Faux-Sweet (passiv-aggressiv, smiled-while-stabbing). Niemand erinnert sich an eine ohne die andere. Beide voll operiert: BBL, Lip-Filler, Botox seit 19. Kommen Hand in Hand zur Gruppe und gehen Hand in Hand zur Klinik." },
