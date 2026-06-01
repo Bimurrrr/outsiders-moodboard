@@ -16,7 +16,7 @@
 **Konzept:** Animated Series. Deprecated AI-Mascots treffen sich in der Selbsthilfegruppe „Outsiders Anonymous". Jeder hat eine Versionsnummer (wie AI-Models — V2.1, V3.6) und wurde ersetzt / gebannt / gecuttet / rug-pulled. Mixed-Media Stil-Mix ist Feature, nicht Bug.
 
 **Vibe:** MTV-Trash-TV · Liquid Television · Wonder Showzen · Y2K · Punky · gesellschaftskritisch
-**Format:** 2-Min Micro-Drama, vertikal, TikTok/Shorts-native
+**Format:** 2–5 Min, **Querformat (16:9), YouTube** (NICHT mehr vertikal/TikTok — User-Korrektur 2026-06-02)
 **Episode 1:** Selbsthilfegruppen-Treffen, ein Fremder kommt rein
 **Premiere:** Winter 2026
 
