@@ -71,6 +71,27 @@
     padding: 8px 14px; border-radius: 999px; white-space: nowrap;
   }
 
+  /* ───── SOUND TOGGLE (dezent) ───── */
+  .sound-btn {
+    position: fixed; bottom: 18px; right: 18px; z-index: 120;
+    width: 42px; height: 42px; border-radius: 50%;
+    background: rgba(18,18,20,0.55);
+    -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.14);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 3px;
+    opacity: 0.55; transition: opacity .2s, transform .2s;
+  }
+  .sound-btn:hover { opacity: 1; transform: translateY(-2px); }
+  .sound-btn span {
+    display: block; width: 3px; height: 16px; border-radius: 2px; background: var(--pink);
+    animation: eq 0.9s ease-in-out infinite alternate;
+  }
+  .sound-btn span:nth-child(2) { animation-delay: 0.2s; height: 20px; }
+  .sound-btn span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes eq { from { transform: scaleY(0.35); } to { transform: scaleY(1); } }
+  .sound-btn.muted span { animation-play-state: paused; transform: scaleY(0.3); background: var(--muted); }
+
   /* ───── MARQUEE ───── */
   .marquee {
     background: var(--pink);
@@ -876,27 +897,34 @@ modalBg.addEventListener("click", e => { if (e.target === modalBg) closeModal();
 document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
 </script>
 
-<!-- Hidden background theme: MSI – Never Wanted To Dance. Startet bei der ersten Nutzer-Geste (Browser-Autoplay-Sperre). -->
+<!-- Hidden background theme: MSI – Never Wanted To Dance + dezenter Sound-Toggle -->
 <div id="yt-bg-wrap" aria-hidden="true" style="position:fixed;bottom:0;right:0;width:1px;height:1px;overflow:hidden;opacity:0.01;pointer-events:none;z-index:0;"><div id="yt-bg"></div></div>
+<button id="sound-btn" class="sound-btn muted" aria-label="Theme-Musik an/aus" title="Theme an/aus"><span></span><span></span><span></span></button>
 <script>
-  var ytBg, ytBgStarted = false;
+  var ytBg, ytReady = false, musicOn = false, started = false, pendingStart = false;
   window.onYouTubeIframeAPIReady = function () {
     ytBg = new YT.Player('yt-bg', {
       width: '320', height: '180',
       videoId: 'UR0UkTiKxmc',
-      playerVars: { autoplay: 0, controls: 0, disablekb: 1, loop: 1, playlist: 'UR0UkTiKxmc', playsinline: 1 }
+      playerVars: { autoplay: 0, controls: 0, disablekb: 1, loop: 1, playlist: 'UR0UkTiKxmc', playsinline: 1 },
+      events: { onReady: function () { ytReady = true; if (pendingStart) musicPlay(); } }
     });
   };
-  function startBgMusic() {
-    if (ytBgStarted || !ytBg || typeof ytBg.playVideo !== 'function') return;
-    ytBgStarted = true;
+  function reflectBtn() { var b = document.getElementById('sound-btn'); if (b) b.classList.toggle('muted', !musicOn); }
+  function musicPlay() {
+    started = true; musicOn = true; reflectBtn();
+    if (!ytReady) { pendingStart = true; return; }
     try { ytBg.unMute(); ytBg.setVolume(75); } catch (e) {}
     ytBg.playVideo();
   }
-  ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function (ev) {
-    document.addEventListener(ev, startBgMusic, { passive: true });
+  function musicPause() { musicOn = false; reflectBtn(); if (ytReady) ytBg.pauseVideo(); }
+  function firstGesture() { if (!started) musicPlay(); }
+  ['pointerdown', 'keydown', 'scroll'].forEach(function (ev) {
+    document.addEventListener(ev, firstGesture, { passive: true });
   });
   (function () {
+    var b = document.getElementById('sound-btn');
+    if (b) b.addEventListener('pointerdown', function (e) { e.stopPropagation(); started = true; musicOn ? musicPause() : musicPlay(); });
     var t = document.createElement('script');
     t.src = 'https://www.youtube.com/iframe_api';
     document.head.appendChild(t);
