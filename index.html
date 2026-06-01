@@ -245,7 +245,7 @@
   /* ───── CAST GRID — TRADING CARDS ───── */
   .cast-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-template-columns: repeat(6, 1fr);
     gap: 20px;
   }
   .char {
@@ -377,7 +377,7 @@
     .marquee-track { gap: 32px; }
 
     .cast-grid {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 12px;
     }
     .char-name { font-size: 18px; }
@@ -388,7 +388,7 @@
 
   @media (max-width: 480px) {
     .cast-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, 1fr);
       gap: 14px;
     }
     .section-title { font-size: clamp(34px, 12vw, 56px); }
