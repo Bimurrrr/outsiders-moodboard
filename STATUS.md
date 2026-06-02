@@ -86,7 +86,7 @@ Regeln für alle: **immer einfarbiger BG** (Ausnahme Style D = real-footage). **
 
 - **Custom Domain `outsiders-mascots.com`** noch nicht gekauft. User wollte. WHOIS bestätigt verfügbar. Cloudflare-Registrar ~$10/Jahr. Sobald gekauft: CNAME zu `bimurrrr.github.io`.
 - **Group-Shot / Klassenfoto** v2 fertig (`hf_20260531_225338_de1ca84e-...png`), aber Style-Drift noch nicht 100% — wartet auf Bestätigung ob als Hero-Banner einbauen oder weiter iterieren.
-- **Episode 1 Skript** — Beat-Outline („NEW MEMBER / THE INTAKE" mit Stranger=Gemmy, X-Rat als Moderator) steht im Chat 2026-06-01, noch nicht commited als episode-01.md. Pending User-Sign-off auf Beats. Locations daraus: Meeting Room Wide / Close / Detail + Exterior Entrance.
+- **Episode 1 Skript** — `episode-01.md` + `episode-01.pdf` (v2, 2026-06-02). **Basis = FINNS Trello-Konzept** (Karte „Erste Folge skripten" Kommentar 28.05 + „Random Story Ideen"), NICHT erfunden. Finns Struktur: (1) anonyme Main-Figur betritt Gebäude/Flur → Stuhlkreis, Fokus auf sie + Background-Hinweise · (2) andere Figur (z.B. X-Rat) teilt Geschichte → Episode wird ihr Flashback · (3) Bruch: zu emotional → rausgerissen zurück zum Kreis · (4) Cliffhanger: Main-Figur hebt Kopf, spricht erstmals „Hallo mein Name ist…". + Finns Cold-Open: 2 Grafiker echte Welt cringe-KI-talk. Offen: wer ist Main-Figur (Cast-Lore: X-Rat spricht erst am Ende → X-Rat=Main?), wessen Flashback. **WICHTIG: Story immer aus Finns Trello ziehen, nicht erfinden.**
 - **Animation-Tests** mit Higgsfield — noch nicht gestartet. Plan: X-Rat als Personal-Clipper-Character locken, dann erste 5-Sek-Clips.
 
 ## Tools / Zugänge
