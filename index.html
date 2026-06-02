@@ -501,6 +501,14 @@
     font-weight: 700; margin-top: 8px;
   }
   .modal-body .desc { font-size: 15px; line-height: 1.65; color: #e3e3e7; }
+  .modal-body .card-dl {
+    margin-top: 20px; align-self: flex-start;
+    background: var(--pink); color: var(--bg); border: 0; border-radius: 999px;
+    cursor: pointer; font-family: "JetBrains Mono", monospace;
+    font-size: 13px; font-weight: 700; letter-spacing: 0.04em; padding: 12px 20px;
+    transition: background .15s, transform .15s;
+  }
+  .modal-body .card-dl:hover { background: var(--yellow); transform: translateY(-2px); }
   .modal-close {
     position: absolute; top: 14px; right: 16px;
     background: rgba(0,0,0,0.5); color: var(--fg);
@@ -795,6 +803,7 @@
       </div>
       <div class="lore-label">▸ Origin Story</div>
       <div class="desc" id="modal-desc"></div>
+      <button class="card-dl" onclick="downloadCard()">⬇ Karte als JPEG speichern</button>
     </div>
   </div>
 </div>
@@ -928,7 +937,9 @@ CAST_FINAL.forEach(c => {
 
 const modalBg = document.getElementById("modal-bg");
 const modalCard = document.getElementById("modal-card");
+let currentChar = null;
 function openModal(c) {
+  currentChar = c;
   document.getElementById("modal-img").src = c.img;
   document.getElementById("modal-num").textContent = c.n;
   document.getElementById("modal-name").textContent = c.name;
@@ -947,6 +958,74 @@ function openModal(c) {
 function closeModal() {
   modalBg.classList.remove("open");
   document.body.style.overflow = "";
+}
+function rrect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+}
+function downloadCard() {
+  const c = currentChar;
+  if (!c) return;
+  const W = 900, H = 1340, pad = 36;
+  const canvas = document.createElement("canvas");
+  canvas.width = W; canvas.height = H;
+  const ctx = canvas.getContext("2d");
+  const g = ctx.createLinearGradient(0, 0, W, H);
+  g.addColorStop(0, "#16161a"); g.addColorStop(1, "#070708");
+  ctx.fillStyle = g; rrect(ctx, 0, 0, W, H, 30); ctx.fill();
+  ctx.strokeStyle = "rgba(255,255,255,0.12)"; ctx.lineWidth = 2;
+  rrect(ctx, 2, 2, W - 4, H - 4, 28); ctx.stroke();
+  const img = new Image();
+  img.onload = function () {
+    const ix = pad, iy = pad, iw = W - pad * 2, ih = Math.round(iw * 4 / 3);
+    ctx.save(); rrect(ctx, ix, iy, iw, ih, 16); ctx.clip();
+    const tar = iw / ih, ar = img.width / img.height;
+    let sw, sh, sx, sy;
+    if (ar > tar) { sh = img.height; sw = sh * tar; sx = (img.width - sw) / 2; sy = 0; }
+    else { sw = img.width; sh = sw / tar; sx = 0; sy = (img.height - sh) / 2; }
+    ctx.drawImage(img, sx, sy, sw, sh, ix, iy, iw, ih);
+    ctx.restore();
+    ctx.strokeStyle = "rgba(255,255,255,0.18)"; ctx.lineWidth = 2;
+    rrect(ctx, ix, iy, iw, ih, 16); ctx.stroke();
+    // number badge
+    ctx.fillStyle = "#070708"; rrect(ctx, ix + 16, iy + 16, 130, 58, 12); ctx.fill();
+    ctx.strokeStyle = "rgba(255,255,255,0.16)"; ctx.lineWidth = 1.5; rrect(ctx, ix + 16, iy + 16, 130, 58, 12); ctx.stroke();
+    ctx.textBaseline = "middle";
+    ctx.fillStyle = "#ff2d95"; ctx.font = '500 30px "JetBrains Mono", monospace';
+    ctx.fillText("#", ix + 32, iy + 47);
+    ctx.fillStyle = "#ffffff"; ctx.font = '400 46px "Anton", sans-serif';
+    ctx.fillText(c.n, ix + 58, iy + 47);
+    // footer
+    ctx.textBaseline = "alphabetic";
+    const fy = iy + ih + 64;
+    ctx.fillStyle = "#ffffff"; ctx.font = '400 58px "Anton", sans-serif';
+    ctx.fillText((c.name || "").toUpperCase(), pad, fy);
+    ctx.font = '700 26px "JetBrains Mono", monospace'; ctx.fillStyle = "#f5e000";
+    ctx.fillText(c.hideVersion ? "OG" : c.version, pad, fy + 50);
+    ctx.fillStyle = "#8c887d"; ctx.font = '700 22px "JetBrains Mono", monospace';
+    ctx.fillText((c.style || "").toUpperCase(), pad, fy + 86);
+    // gender circle
+    const gx = W - pad - 30, gy = fy - 14;
+    ctx.fillStyle = c.female ? "#ff2d95" : "#18c9ff";
+    ctx.beginPath(); ctx.arc(gx, gy, 26, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#070708"; ctx.font = '900 30px sans-serif';
+    ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.fillText(c.female ? "♀" : "♂", gx, gy + 2);
+    ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+    // branding
+    ctx.fillStyle = "#5a5a60"; ctx.font = '700 22px "JetBrains Mono", monospace';
+    ctx.fillText("THE OUTSIDERS · WINTER 2026", pad, H - pad);
+    const a = document.createElement("a");
+    a.href = canvas.toDataURL("image/jpeg", 0.92);
+    a.download = "outsiders-" + c.n + "-" + (c.name || "").replace(/[^a-z0-9]+/gi, "-").toLowerCase() + ".jpg";
+    document.body.appendChild(a); a.click(); a.remove();
+  };
+  img.src = c.img;
 }
 modalBg.addEventListener("click", e => { if (e.target === modalBg) closeModal(); });
 document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
