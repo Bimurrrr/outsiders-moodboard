@@ -389,19 +389,25 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 12px;
     }
-    .char-name { font-size: 18px; }
-    .char-meta { padding: 14px 14px 16px; }
-    .char-meta-row { font-size: 10px; }
-    .char-style { font-size: 9px; }
+    .char-name { font-size: 15px; }
+    .char-meta { padding: 11px 6px 13px; }
+    .char-meta-row { padding: 7px 8px; }
+    .char-version { font-size: 10px; }
+    .char-style { font-size: 8px; }
+    .char-corner { font-size: 16px; }
   }
 
   @media (max-width: 480px) {
     .cast-grid {
       grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
+      gap: 12px;
     }
     .section-title { font-size: clamp(34px, 12vw, 56px); }
     .hero-logo-img { width: 100%; }
+    .char-name { font-size: 14px; min-height: 2.2em; }
+    .char-style { display: none; }
+    .nav-pill { gap: 2px; padding: 5px 6px; }
+    .nav-pill a { padding: 7px 9px; font-size: 10px; letter-spacing: 0.02em; }
   }
 
   /* ───── MODAL ───── */
@@ -972,8 +978,8 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal()
   window.onYouTubeIframeAPIReady = function () {
     ytBg = new YT.Player('yt-bg', {
       width: '320', height: '180',
-      videoId: 'UR0UkTiKxmc',
-      playerVars: { autoplay: 1, mute: 1, controls: 0, disablekb: 1, loop: 1, playlist: 'UR0UkTiKxmc', playsinline: 1 },
+      videoId: 'fzHui4ybChU',
+      playerVars: { autoplay: 1, mute: 1, controls: 0, disablekb: 1, loop: 1, playlist: 'fzHui4ybChU', playsinline: 1 },
       events: { onReady: function () {
         ytReady = true;
         try { ytBg.mute(); ytBg.playVideo(); } catch (e) {}   // muted autoplay — vom Browser erlaubt
