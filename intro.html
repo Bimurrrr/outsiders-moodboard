@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE OUTSIDERS — Intro</title>
+<style>
+  :root { --yellow:#f5e000; --pink:#ff2d95; --green:#00e88a; --cyan:#18c9ff; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html,body { background:#000; height:100%; overflow:hidden; }
+  body { display:flex; align-items:center; justify-content:center; }
+
+  /* 16:9 stage */
+  .stage {
+    position:relative; width:100vw; height:56.25vw; max-height:100vh; max-width:177.78vh;
+    background:#000; overflow:hidden;
+  }
+
+  /* background that flips black -> yellow on the flash */
+  .bg { position:absolute; inset:0; background:#000; }
+  .playing .bg { animation: bgflip 3.6s steps(1) forwards; }
+  @keyframes bgflip { 0%{background:#000;} 19%{background:#000;} 20%{background:var(--yellow);} 82%{background:var(--yellow);} 83%{background:#000;} 100%{background:#000;} }
+
+  /* CRT static noise */
+  .noise {
+    position:absolute; inset:-50%; opacity:0; pointer-events:none; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .playing .noise { animation: noise 3.6s steps(1) forwards, jitter .12s steps(2) infinite; }
+  @keyframes noise { 0%{opacity:.55;} 18%{opacity:.55;} 21%{opacity:.08;} 80%{opacity:.08;} 84%{opacity:.5;} 100%{opacity:0;} }
+  @keyframes jitter { 0%{transform:translate(0,0);} 100%{transform:translate(2%,1%);} }
+
+  /* scanlines */
+  .scan { position:absolute; inset:0; pointer-events:none; opacity:.25;
+    background:repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0 2px, rgba(0,0,0,.5) 3px 4px); }
+
+  /* white flash */
+  .flash { position:absolute; inset:0; background:#fff; opacity:0; pointer-events:none; }
+  .playing .flash { animation: flash 3.6s ease-out forwards; }
+  @keyframes flash { 0%,18%{opacity:0;} 20%{opacity:1;} 27%{opacity:0;} 82%{opacity:0;} 84%{opacity:.9;} 90%{opacity:0;} 100%{opacity:0;} }
+
+  /* logo */
+  .logo {
+    position:absolute; top:50%; left:50%; width:74%; max-width:1100px; height:auto;
+    transform:translate(-50%,-50%) scale(.2); opacity:0;
+    filter:drop-shadow(0 0 0 transparent);
+  }
+  .playing .logo { animation: logoin 3.6s cubic-bezier(.2,.8,.2,1.1) forwards, rgb 3.6s steps(1) forwards; }
+  @keyframes logoin {
+    0%,19%   { opacity:0; transform:translate(-50%,-50%) scale(.2); }
+    24%      { opacity:1; transform:translate(-50%,-50%) scale(1.12); }
+    29%      { transform:translate(-50%,-50%) scale(.97); }
+    33%      { transform:translate(-50%,-50%) scale(1.02); }
+    36%,50%  { transform:translate(-50%,-50%) scale(1); }
+    /* glitch jitters */
+    55%{ transform:translate(-51.5%,-50%) scale(1); }
+    57%{ transform:translate(-48.5%,-50.6%) scale(1.01); }
+    59%{ transform:translate(-50%,-50%) scale(1); }
+    80%      { opacity:1; transform:translate(-50%,-50%) scale(1); }
+    83%      { opacity:0; transform:translate(-50%,-50%) scale(1.04); }
+    100%     { opacity:0; }
+  }
+  @keyframes rgb {
+    0%,52%   { filter:drop-shadow(0 0 0 transparent); }
+    54%      { filter:drop-shadow(5px 0 0 rgba(255,45,149,.85)) drop-shadow(-5px 0 0 rgba(24,201,255,.8)); }
+    60%      { filter:drop-shadow(0 0 0 transparent); }
+    100%     { filter:drop-shadow(0 0 0 transparent); }
+  }
+
+  /* bottom strip */
+  .strip {
+    position:absolute; left:0; right:0; bottom:13%;
+    text-align:center; font-family:"Courier New",monospace; font-weight:700;
+    font-size:2.4vw; letter-spacing:.35em; text-transform:uppercase; color:#000;
+    opacity:0;
+  }
+  .strip b { background:var(--pink); color:#000; padding:.25em .5em; }
+  .playing .strip { animation: strip 3.6s steps(1) forwards; }
+  @keyframes strip { 0%,40%{opacity:0;} 43%{opacity:1;} 80%{opacity:1;} 83%{opacity:0;} 100%{opacity:0;} }
+
+  /* final blackout already handled by bg; keep a clean end */
+
+  .replay {
+    position:fixed; bottom:14px; right:14px; z-index:50;
+    background:#111; color:#fff; border:1px solid #333; border-radius:8px;
+    font-family:monospace; font-size:13px; padding:8px 14px; cursor:pointer; opacity:.6;
+  }
+  .replay:hover { opacity:1; }
+  @media (max-width:700px){ .strip{ font-size:3.4vw; } }
+</style>
+</head>
+<body>
+  <div class="stage" id="stage">
+    <div class="bg"></div>
+    <img class="logo" src="logo.png" alt="THE OUTSIDERS">
+    <div class="strip"><b>Outsiders Anonymous · Winter 2026</b></div>
+    <div class="scan"></div>
+    <div class="noise"></div>
+    <div class="flash"></div>
+  </div>
+  <button class="replay" onclick="play()">↻ Replay</button>
+<script>
+  const stage = document.getElementById('stage');
+  function play(){
+    stage.classList.remove('playing');
+    void stage.offsetWidth; // reflow to restart animations
+    stage.classList.add('playing');
+  }
+  window.addEventListener('load', play);
+</script>
+</body>
+</html>
