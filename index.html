@@ -9,18 +9,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Inter:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #060607;
-    --bg-2: #0e0e10;
-    --card: #151517;
-    --line: #2c2c31;
-    --fg: #fff;
+    --bg: #ffffff;
+    --bg-2: #f5f5f7;
+    --card: #ffffff;
+    --line: #d4d4d8;
+    --fg: #0a0a0b;
     --muted: #7c7c84;
     --pink: #ff2d95;
     --pink-bright: #ff1493;
     --red: #e50026;
-    --yellow: #f5e000;
-    --green: #00e88a;
-    --cyan: #18c9ff;
+    --yellow: #ff1493;
+    --green: #ff2d95;
+    --cyan: #ff2d95;
+    --ink: #0a0a0b;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -730,6 +731,59 @@
   .idx-list a.active .badge-sm { color:var(--pink-bright); border-color:var(--pink-bright); }
   .idx-foot { padding:14px 24px; border-top:1px solid #1f1f22; font-family:'JetBrains Mono',monospace; font-size:10px; color:#7c7c84; letter-spacing:.06em; }
   @media (max-width:600px) { .idx-fab { left:14px; bottom:14px; padding:10px 14px; font-size:11px; } }
+
+  /* ===== Whitemode Overrides (white/pink/black only) ===== */
+  body { background:#fff; color:var(--ink); }
+  body::after { opacity:0.03; mix-blend-mode:multiply; }
+
+  /* Nav pill — solid white-frost on light bg */
+  .nav-pill { background:rgba(255,255,255,0.85) !important; border:1px solid var(--line) !important; backdrop-filter:blur(10px); }
+  .nav-pill a { color:var(--ink) !important; }
+  .nav-pill a:hover { color:var(--pink-bright) !important; background:rgba(255,20,147,0.08) !important; }
+  .nav-div { background:var(--line) !important; }
+  .nav-premiere { color:var(--ink) !important; background:var(--pink-bright) !important; }
+
+  /* Sound button — black on white */
+  .sound-btn { background:var(--ink) !important; }
+  .sound-btn span { background:var(--pink-bright) !important; }
+
+  /* Marquee — black band as accent strip */
+  .marquee { background:var(--ink) !important; color:#fff !important; border-top:1px solid var(--ink) !important; border-bottom:1px solid var(--ink) !important; }
+  .marquee.invert { background:#fff !important; color:var(--ink) !important; border-top:1px solid var(--ink) !important; border-bottom:1px solid var(--ink) !important; }
+  .marquee span::after { color:var(--pink-bright) !important; }
+
+  /* Sections — all white */
+  section { background:#fff; color:var(--ink); }
+  .section-num { color:var(--pink-bright) !important; }
+  .section-title { color:var(--ink) !important; }
+  .section-sub { color:#444 !important; }
+
+  /* Cast cards — white with border, pink hover */
+  .char { background:#fff !important; border:1px solid var(--line) !important; color:var(--ink) !important; }
+  .char:hover { border-color:var(--pink-bright) !important; box-shadow:0 18px 40px rgba(255,20,147,0.18), 0 0 0 1px var(--pink-bright) !important; }
+  .char-corner, .char-name, .char-meta { color:var(--ink) !important; }
+  .char-corner .hash { color:var(--pink-bright) !important; }
+
+  /* Concept cards */
+  .concept-card { background:#fff !important; border:1px solid var(--line) !important; color:var(--ink) !important; }
+  .concept-card h3 { color:var(--pink-bright) !important; }
+
+  /* Format row */
+  .format-item { color:var(--ink) !important; }
+  .format-item .label { color:#666 !important; }
+  .format-item .value { color:var(--ink) !important; }
+  .format-item .sub { color:#666 !important; }
+
+  /* Modal — dark card stays for contrast/cinema feel */
+  .modal-card { background:var(--ink) !important; color:#fff !important; }
+  .modal-body { color:#fff !important; }
+  .modal-card .mc-num { color:#fff !important; }
+  .modal-card .mc-num .hash { color:var(--pink-bright) !important; }
+
+  /* Footer — black anchor */
+  footer { background:var(--ink) !important; color:#fff !important; }
+  footer .tagline { color:#fff !important; }
+  footer .credits { color:#999 !important; }
 
   /* ===== Credits Section (Sony-Pictures End Card Style) ===== */
   .credits-section { background:#fff; color:#0a0a0b; padding:90px 24px 110px; }
