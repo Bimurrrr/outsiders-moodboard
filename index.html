@@ -830,7 +830,11 @@
     letter-spacing:0.18em; text-transform:uppercase;
     background:#fff; color:#0a0a0b;
   }
-  .cr-logo-slot:last-child { color:#999; border-style:dashed; border-color:#999; }
+  .cr-logo-slot.cr-img { padding:14px; border:none; }
+  .cr-logo-slot.cr-img img { max-width:100%; max-height:80%; object-fit:contain; }
+  .cr-logo-slot.cr-rating { border:none; display:flex; flex-direction:row; align-items:center; gap:10px; justify-content:flex-start; padding:0 10px; }
+  .cr-rating-box { width:46px; height:46px; background:#fff; border:2.5px solid #0a0a0b; display:flex; align-items:center; justify-content:center; font-family:"Anton",sans-serif; font-size:36px; line-height:1; color:#0a0a0b; flex-shrink:0; }
+  .cr-rating-text { font-family:"JetBrains Mono",monospace; font-size:8px; font-weight:700; line-height:1.25; letter-spacing:0.05em; text-align:left; color:#0a0a0b; text-transform:uppercase; }
   .cr-premiere {
     font-family:"Anton", sans-serif; font-size:clamp(22px, 3vw, 36px); margin-top:28px !important;
     letter-spacing:0.04em; color:#0a0a0b;
@@ -1036,10 +1040,13 @@ document.addEventListener('keydown', e => { if(e.key==='Escape') closeTrailer();
     <p class="cr-tiny copy">© 2026 DREAMWORLD · ALL RIGHTS RESERVED</p>
 
     <div class="cr-logos">
-      <div class="cr-logo-slot"><span>DREAMWORLD</span></div>
+      <div class="cr-logo-slot cr-rating">
+        <div class="cr-rating-box">R</div>
+        <div class="cr-rating-text">FOR LANGUAGE<br>AND OUTSIDER BEHAVIOR</div>
+      </div>
+      <div class="cr-logo-slot cr-img"><img src="dreamworld-logo.png" alt="DREAMWORLD"></div>
       <div class="cr-logo-slot"><span>HIGGSFIELD</span></div>
       <div class="cr-logo-slot"><span>ELEVENLABS</span></div>
-      <div class="cr-logo-slot"><span>+ ADD</span></div>
     </div>
 
     <p class="cr-premiere">PREMIERING WINTER 2026</p>
