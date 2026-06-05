@@ -148,17 +148,15 @@
     width: 100%;
   }
   .hero-title {
-    font-family: "Anton", sans-serif;
-    font-size: clamp(64px, 12vw, 200px);
-    font-weight: 400;
-    line-height: 0.9;
-    letter-spacing: -0.02em;
-    color: var(--pink-bright);
-    -webkit-text-stroke: 3px var(--red);
-    text-transform: uppercase;
-    margin: 0 0 14px;
-    transform: scaleY(1.18);
-    transform-origin: center bottom;
+    margin: 0 0 22px;
+    display: block;
+    line-height: 0;
+  }
+  .hero-title img {
+    width: min(900px, 92%);
+    height: auto;
+    display: block;
+    margin: 0 auto;
   }
   /* Watch Trailer button */
   .hero-trailer-btn {
@@ -696,7 +694,7 @@
 
   /* ===== Production Index Drawer ===== */
   .idx-fab {
-    position:fixed; right:18px; bottom:18px; z-index:100;
+    position:fixed; left:18px; bottom:18px; z-index:100;
     background:var(--pink-bright); color:#0a0a0b; border:2px solid var(--red); border-radius:999px;
     font-family:'JetBrains Mono',monospace; font-weight:700; font-size:12px;
     padding:11px 17px; cursor:pointer; letter-spacing:.1em; text-transform:uppercase;
@@ -707,7 +705,7 @@
   .idx-fab .arr { display:inline-block; margin-left:6px; opacity:.6; }
   .idx-overlay { position:fixed; inset:0; background:rgba(0,0,0,.7); z-index:99; opacity:0; pointer-events:none; transition:opacity .25s ease; backdrop-filter:blur(2px); }
   .idx-overlay.open { opacity:1; pointer-events:auto; }
-  .idx-drawer { position:fixed; top:0; right:0; height:100vh; width:min(380px,88vw); z-index:100; background:#0c0c0e; border-left:1px solid #1f1f22; transform:translateX(100%); transition:transform .3s cubic-bezier(.22,.8,.28,1); display:flex; flex-direction:column; }
+  .idx-drawer { position:fixed; top:0; left:0; height:100vh; width:min(380px,88vw); z-index:100; background:#0c0c0e; border-right:1px solid #1f1f22; transform:translateX(-100%); transition:transform .3s cubic-bezier(.22,.8,.28,1); display:flex; flex-direction:column; }
   .idx-drawer.open { transform:translateX(0); }
   .idx-head { padding:22px 24px 18px; border-bottom:1px solid #1f1f22; display:flex; justify-content:space-between; align-items:center; }
   .idx-head h3 { font-family:'Anton',sans-serif; font-size:22px; letter-spacing:.04em; color:var(--pink-bright); -webkit-text-stroke:1px var(--red); }
@@ -731,7 +729,63 @@
   .idx-list .badge-sm { font-family:'JetBrains Mono',monospace; font-size:9px; color:#7c7c84; border:1px solid #1f1f22; border-radius:3px; padding:2px 5px; letter-spacing:.05em; text-transform:uppercase; }
   .idx-list a.active .badge-sm { color:var(--pink-bright); border-color:var(--pink-bright); }
   .idx-foot { padding:14px 24px; border-top:1px solid #1f1f22; font-family:'JetBrains Mono',monospace; font-size:10px; color:#7c7c84; letter-spacing:.06em; }
-  @media (max-width:600px) { .idx-fab { right:14px; bottom:14px; padding:10px 14px; font-size:11px; } }
+  @media (max-width:600px) { .idx-fab { left:14px; bottom:14px; padding:10px 14px; font-size:11px; } }
+
+  /* ===== Credits Section (Sony-Pictures End Card Style) ===== */
+  .credits-section { background:#fff; color:#0a0a0b; padding:90px 24px 110px; }
+  .credits-card {
+    max-width:920px; margin:24px auto 0;
+    font-family:"Inter", sans-serif;
+    text-align:center;
+    letter-spacing:0.04em;
+    line-height:1.55;
+  }
+  .credits-card p { margin:0; padding:3px 0; }
+  .cr-tiny { font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:0.12em; }
+  .cr-thin { font-weight:400; text-transform:lowercase; letter-spacing:0.02em; color:#444; font-size:0.9em; }
+  .cr-title {
+    font-family:"Anton", sans-serif;
+    font-size:clamp(38px, 5.5vw, 72px);
+    margin:36px 0 28px !important;
+    color:var(--pink-bright);
+    -webkit-text-stroke:2px var(--red);
+    letter-spacing:-0.01em;
+    line-height:1;
+    transform:scaleY(1.12);
+    transform-origin:center;
+  }
+  .cr-line {
+    font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em;
+    margin:6px 0 !important; padding:5px 0 !important;
+  }
+  .cr-url {
+    font-family:"JetBrains Mono", monospace; font-size:13px; font-weight:600;
+    margin:30px 0 6px !important; color:var(--red);
+    letter-spacing:0.04em; text-transform:none;
+  }
+  .cr-tiny.copy { margin-top:0 !important; color:#666; font-size:10px; letter-spacing:0.16em; }
+  .cr-logos {
+    margin:38px auto 22px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap;
+    max-width:780px;
+  }
+  .cr-logo-slot {
+    flex:1 1 160px; max-width:200px; aspect-ratio:5/2;
+    border:1.5px solid #0a0a0b;
+    display:flex; align-items:center; justify-content:center;
+    font-family:"JetBrains Mono", monospace; font-weight:700; font-size:11px;
+    letter-spacing:0.18em; text-transform:uppercase;
+    background:#fff; color:#0a0a0b;
+  }
+  .cr-logo-slot:last-child { color:#999; border-style:dashed; border-color:#999; }
+  .cr-premiere {
+    font-family:"Anton", sans-serif; font-size:clamp(22px, 3vw, 36px); margin-top:28px !important;
+    letter-spacing:0.04em; color:#0a0a0b;
+  }
+  @media (max-width:600px) {
+    .credits-section { padding:60px 16px 80px; }
+    .cr-line { font-size:11px; }
+    .cr-tiny { font-size:11px; }
+  }
 </style>
 </head>
 <body>
@@ -742,6 +796,7 @@
     <a href="#concept">Concept</a>
     <a href="#format">Format</a>
     <a href="#team">Team</a>
+    <a href="#credits">Credits</a>
     <span class="nav-div"></span>
     <span class="nav-premiere">Winter 2026</span>
   </div>
@@ -750,7 +805,7 @@
 <!-- HERO -->
 <header class="hero">
   <div class="hero-overlay">
-    <h1 class="hero-title">THE OUTSIDERS</h1>
+    <h1 class="hero-title"><img src="logo-outsiders.png" alt="THE OUTSIDERS"></h1>
     <p class="hero-subtitle">
       Eine Serie über deprecated AI-Mascots, die in der Selbsthilfegruppe
       „Outsiders Anonymous” auf sich selbst treffen.
@@ -898,6 +953,42 @@ document.addEventListener('keydown', e => { if(e.key==='Escape') closeTrailer();
       <div class="value">Finn Delius</div>
       <div class="sub">Storyboard, character lore</div>
     </div>
+  </div>
+</section>
+
+<!-- 05 / CREDITS — Sony-Pictures-Style End Card -->
+<section id="credits" class="credits-section">
+  <div class="section-head">
+    <div class="section-num">05 / CREDITS</div>
+    <h2 class="section-title">END CARD</h2>
+  </div>
+  <div class="credits-card">
+    <p class="cr-tiny">DREAMWORLD <span class="cr-thin">presents</span></p>
+    <p class="cr-tiny"><span class="cr-thin">in association with</span> [TBD] <span class="cr-thin">and</span> [TBD]</p>
+    <p class="cr-tiny"><span class="cr-thin">a</span> BIMURRRR / FINN DELIUS <span class="cr-thin">production</span></p>
+    <p class="cr-tiny"><span class="cr-thin">in association with</span> HIGGSFIELD AI <span class="cr-thin">and</span> ELEVENLABS</p>
+
+    <p class="cr-title">THE OUTSIDERS</p>
+
+    <p class="cr-line"><span class="cr-thin">starring</span> X-RAT &nbsp;·&nbsp; KAWAI &nbsp;·&nbsp; MR. ROBINSON &nbsp;·&nbsp; CHICO &nbsp;·&nbsp; SCHAUMI &nbsp;·&nbsp; FETCH &nbsp;·&nbsp; BOBBY YELLOW &nbsp;·&nbsp; CASHY &nbsp;·&nbsp; PURRZ &nbsp;·&nbsp; JOJO &nbsp;·&nbsp; KRAZY &nbsp;·&nbsp; DIABLA &nbsp;·&nbsp; ONYX &nbsp;·&nbsp; BUNNY &amp; ANGEL &nbsp;·&nbsp; BOBBY GIRL &nbsp;·&nbsp; SPANKY &nbsp;·&nbsp; BABY BIZZ &nbsp;·&nbsp; FRANKY DEAKY JOE</p>
+
+    <p class="cr-line"><span class="cr-thin">story by</span> FINN DELIUS &nbsp;&nbsp; <span class="cr-thin">directed by</span> BIMURRRR &nbsp;&nbsp; <span class="cr-thin">production design</span> BIMURRRR</p>
+    <p class="cr-line"><span class="cr-thin">visual development &amp; animation</span> BIMURRRR &nbsp;&nbsp; <span class="cr-thin">edited by</span> BIMURRRR</p>
+    <p class="cr-line"><span class="cr-thin">image generation</span> HIGGSFIELD AI · CINEMA STUDIO 2.5 · NANO BANANA PRO &nbsp;&nbsp; <span class="cr-thin">motion</span> KLING 3.0 · SEEDANCE 2.0</p>
+    <p class="cr-line"><span class="cr-thin">voice direction &amp; vo</span> ELEVENLABS ELEVEN CREATIVE STUDIO &nbsp;&nbsp; <span class="cr-thin">music by</span> [TBD]</p>
+    <p class="cr-line"><span class="cr-thin">sound design</span> [TBD] &nbsp;&nbsp; <span class="cr-thin">color grading</span> BIMURRRR &nbsp;&nbsp; <span class="cr-thin">post-production</span> ADOBE PREMIERE PRO</p>
+
+    <p class="cr-url">bimurrrr.github.io/outsiders-moodboard</p>
+    <p class="cr-tiny copy">© 2026 DREAMWORLD · ALL RIGHTS RESERVED</p>
+
+    <div class="cr-logos">
+      <div class="cr-logo-slot"><span>DREAMWORLD</span></div>
+      <div class="cr-logo-slot"><span>HIGGSFIELD</span></div>
+      <div class="cr-logo-slot"><span>ELEVENLABS</span></div>
+      <div class="cr-logo-slot"><span>+ ADD</span></div>
+    </div>
+
+    <p class="cr-premiere">PREMIERING WINTER 2026</p>
   </div>
 </section>
 
