@@ -160,20 +160,45 @@
     transform: scaleY(1.18);
     transform-origin: center bottom;
   }
-  .hero-video-frame {
-    width: min(900px, 92%);
+  /* Watch Trailer button */
+  .hero-trailer-btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: transparent; color: #0a0a0b;
+    padding: 14px 28px;
+    font-weight: 800; font-size: 14px;
+    text-decoration: none; cursor: pointer;
+    border: 2px solid #0a0a0b;
+    font-family: "Archivo Black", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 4px 0 18px;
+    transition: background 0.15s, color 0.15s, transform 0.15s;
+  }
+  .hero-trailer-btn:hover { background: var(--red); color: #fff; border-color: var(--red); transform: translateY(-1px); }
+  .hero-trailer-btn .play-icon { width: 0; height: 0; border-left: 12px solid currentColor; border-top: 8px solid transparent; border-bottom: 8px solid transparent; }
+
+  /* Trailer Modal */
+  .trailer-modal {
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(0,0,0,0.92);
+    display: none; align-items: center; justify-content: center;
+    padding: 24px;
+  }
+  .trailer-modal.open { display: flex; }
+  .trailer-modal-inner {
+    width: min(1200px, 100%);
     aspect-ratio: 16/9;
-    margin: 8px 0 12px;
-    border: 3px solid var(--red);
-    box-shadow: 0 12px 48px rgba(229,0,38,0.18), 0 0 0 1px rgba(229,0,38,0.4);
-    background: #000;
-    overflow: hidden;
     position: relative;
+    box-shadow: 0 24px 80px rgba(229,0,38,0.35), 0 0 0 2px var(--red);
   }
-  .hero-video {
-    width: 100%; height: 100%; display: block;
-    object-fit: cover;
+  .trailer-modal video { width: 100%; height: 100%; display: block; background: #000; }
+  .trailer-modal-close {
+    position: absolute; top: -42px; right: 0;
+    background: transparent; color: #fff; border: 1px solid #fff; border-radius: 999px;
+    padding: 6px 14px; font-family: "JetBrains Mono", monospace; font-size: 12px;
+    cursor: pointer; letter-spacing: 0.08em; text-transform: uppercase;
   }
+  .trailer-modal-close:hover { background: var(--red); border-color: var(--red); }
   .hero-tag {
     background: #0a0a0b;
     color: var(--pink-bright);
@@ -726,15 +751,13 @@
 <header class="hero">
   <div class="hero-overlay">
     <h1 class="hero-title">THE OUTSIDERS</h1>
-    <div class="hero-video-frame">
-      <video class="hero-video" autoplay muted loop playsinline preload="auto">
-        <source src="teaser.mp4" type="video/mp4">
-      </video>
-    </div>
     <p class="hero-subtitle">
       Eine Serie über deprecated AI-Mascots, die in der Selbsthilfegruppe
       „Outsiders Anonymous” auf sich selbst treffen.
     </p>
+    <button class="hero-trailer-btn" onclick="openTrailer()">
+      <span class="play-icon"></span> Watch Trailer
+    </button>
     <div class="hero-meta">
       <span><strong>18</strong> · Outsiders</span>
       <span>Mixed Media</span>
@@ -746,6 +769,33 @@
     </button>
   </div>
 </header>
+
+<!-- Trailer Modal -->
+<div class="trailer-modal" id="trailerModal" onclick="closeTrailerOnOverlay(event)">
+  <div class="trailer-modal-inner" onclick="event.stopPropagation()">
+    <button class="trailer-modal-close" onclick="closeTrailer()">Close ✕</button>
+    <video id="trailerVideo" controls playsinline preload="metadata">
+      <source src="teaser.mp4" type="video/mp4">
+    </video>
+  </div>
+</div>
+<script>
+function openTrailer(){
+  const m = document.getElementById('trailerModal');
+  const v = document.getElementById('trailerVideo');
+  m.classList.add('open');
+  v.currentTime = 0;
+  v.play();
+}
+function closeTrailer(){
+  const m = document.getElementById('trailerModal');
+  const v = document.getElementById('trailerVideo');
+  v.pause();
+  m.classList.remove('open');
+}
+function closeTrailerOnOverlay(e){ if(e.target.id==='trailerModal') closeTrailer(); }
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeTrailer(); });
+</script>
 
 <!-- MARQUEE 1 -->
 <div class="marquee">
