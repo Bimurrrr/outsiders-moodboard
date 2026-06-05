@@ -16,6 +16,8 @@
     --fg: #fff;
     --muted: #7c7c84;
     --pink: #ff2d95;
+    --pink-bright: #ff1493;
+    --red: #e50026;
     --yellow: #f5e000;
     --green: #00e88a;
     --cyan: #18c9ff;
@@ -127,18 +129,50 @@
   .marquee.invert { background: var(--bg); color: var(--fg); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .marquee.invert span::after { color: var(--green); }
 
-  /* ───── HERO ───── */
+  /* ───── HERO (Teaser-Video + Pink/Red Title) ───── */
   .hero {
     padding: 90px 24px 50px;
     display: flex; flex-direction: column; align-items: center;
     position: relative;
     text-align: center;
-    background: var(--yellow);
-    color: var(--bg);
+    background: #000;
+    color: var(--fg);
+    min-height: 100vh;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .hero-video {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; z-index: 0; opacity: 0.55;
+    pointer-events: none;
+  }
+  .hero-video-vignette {
+    position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background:
+      radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.7) 100%),
+      linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0) 70%, rgba(0,0,0,0.6) 100%);
+  }
+  .hero-overlay {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; align-items: center; gap: 0;
+  }
+  .hero-title {
+    font-family: "Anton", sans-serif;
+    font-size: clamp(72px, 13vw, 220px);
+    font-weight: 400;
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    color: var(--pink-bright);
+    -webkit-text-stroke: 3px var(--red);
+    text-transform: uppercase;
+    margin: 0 0 18px;
+    text-shadow: 0 4px 32px rgba(255,20,147,0.35);
+    transform: scaleY(1.15);
+    transform-origin: center bottom;
   }
   .hero-tag {
-    background: var(--bg);
-    color: var(--yellow);
+    background: var(--pink-bright);
+    color: #000;
     font-family: "JetBrains Mono", monospace;
     font-size: 11px;
     letter-spacing: 0.2em;
@@ -147,20 +181,15 @@
     margin-bottom: 22px;
     font-weight: 700;
   }
-  .hero-logo-img {
-    max-width: 92%;
-    width: 1000px;
-    height: auto;
-    margin-bottom: 8px;
-    display: block;
-  }
+  .hero-logo-img { display: none; }
   .hero-subtitle {
-    color: var(--bg);
+    color: var(--fg);
     font-size: clamp(16px, 1.4vw, 20px);
     margin: 12px 0 28px;
     max-width: 640px;
     line-height: 1.4;
-    font-weight: 600;
+    font-weight: 500;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.7);
   }
   .hero-meta {
     display: flex; gap: 0; flex-wrap: wrap; justify-content: center;
@@ -169,34 +198,37 @@
     letter-spacing: 0.12em;
     text-transform: uppercase;
     margin-bottom: 32px;
-    border: 1px solid var(--bg);
+    border: 1px solid var(--fg);
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(4px);
   }
   .hero-meta span {
     padding: 10px 18px;
-    color: var(--bg);
+    color: var(--fg);
     font-weight: 700;
-    border-right: 1px solid var(--bg);
+    border-right: 1px solid var(--fg);
   }
   .hero-meta span:last-child { border-right: 0; }
-  .hero-meta span strong { color: var(--pink); font-weight: 900; }
+  .hero-meta span strong { color: var(--pink-bright); font-weight: 900; }
   .hero-cta {
     display: inline-flex; align-items: center; gap: 12px;
-    background: var(--bg); color: var(--yellow);
+    background: var(--pink-bright); color: #000;
     padding: 18px 38px;
     font-weight: 900; font-size: 15px;
     text-decoration: none;
     cursor: pointer;
-    border: 0;
+    border: 2px solid var(--red);
     font-family: "Archivo Black", sans-serif;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    transition: background 0.12s, color 0.12s;
+    transition: background 0.12s, color 0.12s, transform 0.12s;
+    box-shadow: 0 6px 24px rgba(229,0,38,0.35);
   }
-  .hero-cta:hover { background: var(--pink); color: var(--bg); }
-  .hero-cta:hover::before { border-left-color: var(--bg); }
+  .hero-cta:hover { background: var(--red); color: var(--fg); transform: translateY(-2px); }
+  .hero-cta:hover::before { border-left-color: var(--fg); }
   .hero-cta::before {
     content: ""; width: 0; height: 0;
-    border-left: 14px solid var(--yellow);
+    border-left: 14px solid #000;
     border-top: 9px solid transparent; border-bottom: 9px solid transparent;
     transition: border-left-color 0.12s;
   }
@@ -652,20 +684,26 @@
 
 <!-- HERO -->
 <header class="hero">
-  <img src="logo.jpg" class="hero-logo-img" alt="THE OUTSIDERS">
-  <p class="hero-subtitle">
-    Eine Serie über deprecated AI-Mascots, die in der Selbsthilfegruppe
-    „Outsiders Anonymous” auf sich selbst treffen.
-  </p>
-  <div class="hero-meta">
-    <span><strong>18</strong> · Outsiders</span>
-    <span>Mixed Media</span>
-    <span>2–5 Min</span>
-    <span>Querformat</span>
+  <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="logo.jpg">
+    <source src="teaser.mp4" type="video/mp4">
+  </video>
+  <div class="hero-video-vignette"></div>
+  <div class="hero-overlay">
+    <h1 class="hero-title">THE OUTSIDERS</h1>
+    <p class="hero-subtitle">
+      Eine Serie über deprecated AI-Mascots, die in der Selbsthilfegruppe
+      „Outsiders Anonymous” auf sich selbst treffen.
+    </p>
+    <div class="hero-meta">
+      <span><strong>18</strong> · Outsiders</span>
+      <span>Mixed Media</span>
+      <span>2–5 Min</span>
+      <span>Querformat</span>
+    </div>
+    <button class="hero-cta" onclick="document.getElementById('cast').scrollIntoView()">
+      Meet the Cast
+    </button>
   </div>
-  <button class="hero-cta" onclick="document.getElementById('cast').scrollIntoView()">
-    Meet the Cast
-  </button>
 </header>
 
 <!-- MARQUEE 1 -->
