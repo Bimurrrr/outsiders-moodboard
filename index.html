@@ -796,11 +796,29 @@
   .format-item .value { color:var(--ink) !important; }
   .format-item .sub { color:#666 !important; }
 
-  /* Modal — dark card stays for contrast/cinema feel */
-  .modal-card { background:var(--ink) !important; color:#fff !important; }
-  .modal-body { color:#fff !important; }
-  .modal-card .mc-num { color:#fff !important; }
-  .modal-card .mc-num .hash { color:var(--pink-bright) !important; }
+  /* Modal — white CI body + dark card for the character render */
+  .modal { background:#fff !important; color:var(--ink) !important; }
+  .modal-card { background:var(--ink) !important; color:#fff !important; box-shadow:0 18px 40px rgba(0,0,0,0.15) !important; }
+  .modal-card .mc-num {
+    background:var(--pink-bright) !important;
+    color:#fff !important;
+    border:2px solid var(--ink) !important;
+    box-shadow:0 4px 12px rgba(0,0,0,0.35) !important;
+    padding:6px 14px !important;
+    font-weight:900 !important;
+  }
+  .modal-card .mc-num .hash { color:#fff !important; opacity:0.7; }
+  .modal-body { color:var(--ink) !important; }
+  .modal-body .mb-kicker { color:var(--pink-bright) !important; }
+  .modal-body h2 { color:var(--ink) !important; }
+  .modal-body .mb-ver { color:var(--pink-bright) !important; border-color:var(--ink) !important; }
+  .modal-body .mb-style { color:#444 !important; border-color:#bbb !important; }
+  .modal-body .lore-label { color:var(--pink-bright) !important; }
+  .modal-body .desc { color:#1a1a1d !important; font-weight:500 !important; }
+  .modal-body .card-dl { background:var(--pink-bright) !important; color:#fff !important; border:2px solid var(--ink) !important; }
+  .modal-body .card-dl:hover { background:var(--red) !important; color:#fff !important; }
+  .modal-close { background:var(--ink) !important; color:#fff !important; border:none !important; }
+  .modal-close:hover { background:var(--pink-bright) !important; }
 
   /* Footer — black anchor */
   footer { background:var(--ink) !important; color:#fff !important; }
