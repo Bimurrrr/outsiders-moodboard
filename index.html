@@ -159,45 +159,67 @@
     display: block;
     margin: 0 auto;
   }
-  /* Watch Trailer button */
+  /* Watch Trailer — thumbnail card with play overlay */
   .hero-trailer-btn {
-    display: inline-flex; align-items: center; gap: 12px;
-    background: transparent; color: #0a0a0b;
-    padding: 14px 28px;
-    font-weight: 800; font-size: 14px;
-    text-decoration: none; cursor: pointer;
-    border: 2px solid #0a0a0b;
-    font-family: "Archivo Black", sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin: 4px 0 18px;
-    transition: background 0.15s, color 0.15s, transform 0.15s;
+    position: relative; display: block; padding: 0; cursor: pointer;
+    background: #000; border: 2px solid #0a0a0b; overflow: hidden;
+    width: min(560px, 88%); aspect-ratio: 16/9;
+    margin: 12px auto 24px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
   }
-  .hero-trailer-btn:hover { background: var(--red); color: #fff; border-color: var(--red); transform: translateY(-1px); }
-  .hero-trailer-btn .play-icon { width: 0; height: 0; border-left: 12px solid currentColor; border-top: 8px solid transparent; border-bottom: 8px solid transparent; }
+  .hero-trailer-btn:hover { transform: translateY(-2px); border-color: var(--pink-bright); box-shadow: 0 18px 44px rgba(255,20,147,0.25); }
+  .hero-trailer-btn img.trailer-thumb { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease, filter 0.18s ease; }
+  .hero-trailer-btn:hover img.trailer-thumb { transform: scale(1.04); filter: brightness(0.85); }
+  .hero-trailer-btn .trailer-play {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 76px; height: 76px; border-radius: 999px;
+    background: var(--pink-bright); border: 2px solid #fff;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 6px 22px rgba(0,0,0,0.4);
+    transition: transform 0.18s ease, background 0.18s ease;
+  }
+  .hero-trailer-btn:hover .trailer-play { transform: translate(-50%, -50%) scale(1.08); background: #fff; }
+  .hero-trailer-btn .trailer-play::before {
+    content: ""; width: 0; height: 0;
+    border-left: 22px solid #fff;
+    border-top: 13px solid transparent; border-bottom: 13px solid transparent;
+    margin-left: 6px;
+    transition: border-left-color 0.18s ease;
+  }
+  .hero-trailer-btn:hover .trailer-play::before { border-left-color: var(--pink-bright); }
+  .hero-trailer-btn .trailer-label {
+    position: absolute; bottom: 12px; left: 14px;
+    background: #0a0a0b; color: #fff;
+    font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 700;
+    padding: 5px 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  }
 
-  /* Trailer Modal */
+  /* Trailer Modal — white CI */
   .trailer-modal {
     position: fixed; inset: 0; z-index: 200;
-    background: rgba(0,0,0,0.92);
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(8px);
     display: none; align-items: center; justify-content: center;
-    padding: 24px;
+    padding: 60px 24px 24px;
   }
   .trailer-modal.open { display: flex; }
   .trailer-modal-inner {
-    width: min(1200px, 100%);
+    width: min(820px, 100%);
     aspect-ratio: 16/9;
     position: relative;
-    box-shadow: 0 24px 80px rgba(229,0,38,0.35), 0 0 0 2px var(--red);
+    background: #000;
+    border: 2px solid #0a0a0b;
+    box-shadow: 0 24px 60px rgba(255,20,147,0.18), 0 0 0 1px rgba(0,0,0,0.05);
   }
   .trailer-modal video { width: 100%; height: 100%; display: block; background: #000; }
   .trailer-modal-close {
-    position: absolute; top: -42px; right: 0;
-    background: transparent; color: #fff; border: 1px solid #fff; border-radius: 999px;
-    padding: 6px 14px; font-family: "JetBrains Mono", monospace; font-size: 12px;
-    cursor: pointer; letter-spacing: 0.08em; text-transform: uppercase;
+    position: absolute; top: -44px; right: 0;
+    background: #0a0a0b; color: #fff; border: 2px solid #0a0a0b; border-radius: 0;
+    padding: 7px 14px; font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 700;
+    cursor: pointer; letter-spacing: 0.12em; text-transform: uppercase;
   }
-  .trailer-modal-close:hover { background: var(--red); border-color: var(--red); }
+  .trailer-modal-close:hover { background: var(--pink-bright); border-color: var(--pink-bright); }
   .hero-tag {
     background: #0a0a0b;
     color: var(--pink-bright);
@@ -867,8 +889,10 @@
       Eine Serie über deprecated AI-Mascots, die in der Selbsthilfegruppe
       „Outsiders Anonymous” auf sich selbst treffen.
     </p>
-    <button class="hero-trailer-btn" onclick="openTrailer()">
-      <span class="play-icon"></span> Watch Trailer
+    <button class="hero-trailer-btn" onclick="openTrailer()" aria-label="Watch Trailer">
+      <img class="trailer-thumb" src="teaser-thumb.jpg" alt="">
+      <span class="trailer-play" aria-hidden="true"></span>
+      <span class="trailer-label">▶ Watch Trailer</span>
     </button>
     <div class="hero-meta">
       <span><strong>18</strong> · Outsiders</span>
