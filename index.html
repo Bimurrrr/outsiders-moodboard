@@ -667,6 +667,45 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
+
+  /* ===== Production Index Drawer ===== */
+  .idx-fab {
+    position:fixed; right:18px; bottom:18px; z-index:100;
+    background:var(--pink-bright); color:#0a0a0b; border:2px solid var(--red); border-radius:999px;
+    font-family:'JetBrains Mono',monospace; font-weight:700; font-size:12px;
+    padding:11px 17px; cursor:pointer; letter-spacing:.1em; text-transform:uppercase;
+    box-shadow:0 6px 24px rgba(229,0,38,.5);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .idx-fab:hover { transform:translateY(-1px); box-shadow:0 10px 28px rgba(229,0,38,.7); }
+  .idx-fab .arr { display:inline-block; margin-left:6px; opacity:.6; }
+  .idx-overlay { position:fixed; inset:0; background:rgba(0,0,0,.7); z-index:99; opacity:0; pointer-events:none; transition:opacity .25s ease; backdrop-filter:blur(2px); }
+  .idx-overlay.open { opacity:1; pointer-events:auto; }
+  .idx-drawer { position:fixed; top:0; right:0; height:100vh; width:min(380px,88vw); z-index:100; background:#0c0c0e; border-left:1px solid #1f1f22; transform:translateX(100%); transition:transform .3s cubic-bezier(.22,.8,.28,1); display:flex; flex-direction:column; }
+  .idx-drawer.open { transform:translateX(0); }
+  .idx-head { padding:22px 24px 18px; border-bottom:1px solid #1f1f22; display:flex; justify-content:space-between; align-items:center; }
+  .idx-head h3 { font-family:'Anton',sans-serif; font-size:22px; letter-spacing:.04em; color:var(--pink-bright); -webkit-text-stroke:1px var(--red); }
+  .idx-close { background:transparent; color:#7c7c84; border:1px solid #1f1f22; border-radius:6px; padding:5px 10px; font-family:'JetBrains Mono',monospace; font-size:12px; cursor:pointer; }
+  .idx-close:hover { color:#fff; border-color:#3a3a40; }
+  .idx-body { flex:1; overflow-y:auto; padding:14px 0 28px; }
+  .idx-ep { margin-top:16px; }
+  .idx-ep:first-child { margin-top:6px; }
+  .idx-ep-head { padding:10px 24px 8px; font-family:'JetBrains Mono',monospace; font-size:11px; color:#7c7c84; letter-spacing:.12em; text-transform:uppercase; display:flex; justify-content:space-between; align-items:baseline; }
+  .idx-ep-head .lock { font-size:10px; opacity:.6; }
+  .idx-list { list-style:none; padding:0; margin:0; }
+  .idx-list li { display:block; }
+  .idx-list a, .idx-list span.disabled { display:flex; align-items:center; gap:10px; padding:11px 24px; color:#e8e6e1; text-decoration:none; font-size:14px; border-left:2px solid transparent; transition:background .12s ease, border-color .12s ease; }
+  .idx-list a:hover { background:#131316; border-left-color:var(--pink-bright); }
+  .idx-list .marker { width:16px; flex-shrink:0; font-family:'JetBrains Mono',monospace; font-size:10px; color:#7c7c84; }
+  .idx-list a.active { background:#15151a; border-left-color:var(--pink-bright); }
+  .idx-list a.active .marker { color:var(--pink-bright); }
+  .idx-list span.disabled { color:#4a4a52; cursor:not-allowed; }
+  .idx-list span.disabled .marker { color:#3a3a40; }
+  .idx-list .title { flex:1; }
+  .idx-list .badge-sm { font-family:'JetBrains Mono',monospace; font-size:9px; color:#7c7c84; border:1px solid #1f1f22; border-radius:3px; padding:2px 5px; letter-spacing:.05em; text-transform:uppercase; }
+  .idx-list a.active .badge-sm { color:var(--pink-bright); border-color:var(--pink-bright); }
+  .idx-foot { padding:14px 24px; border-top:1px solid #1f1f22; font-family:'JetBrains Mono',monospace; font-size:10px; color:#7c7c84; letter-spacing:.06em; }
+  @media (max-width:600px) { .idx-fab { right:14px; bottom:14px; padding:10px 14px; font-size:11px; } }
 </style>
 </head>
 <body>
@@ -1125,6 +1164,49 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal()
     t.src = 'https://www.youtube.com/iframe_api';
     document.head.appendChild(t);
   })();
+</script>
+
+<!-- ===== Production Index ===== -->
+<button class="idx-fab" onclick="idxOpen()">≡ Production<span class="arr">↗</span></button>
+<div class="idx-overlay" id="idxOverlay" onclick="idxClose()"></div>
+<aside class="idx-drawer" id="idxDrawer" aria-hidden="true">
+  <div class="idx-head">
+    <h3>NAVIGATION</h3>
+    <button class="idx-close" onclick="idxClose()">Close</button>
+  </div>
+  <div class="idx-body">
+    <div class="idx-ep">
+      <div class="idx-ep-head"><span>Public</span></div>
+      <ul class="idx-list">
+        <li><a href="index.html" class="active"><span class="marker">→</span><span class="title">Homepage / Pitch</span><span class="badge-sm">live</span></a></li>
+      </ul>
+    </div>
+    <div class="idx-ep">
+      <div class="idx-ep-head"><span>Episode 01 · „Mein Name ist…"</span><span>internal</span></div>
+      <ul class="idx-list">
+        <li><span class="disabled"><span class="marker">00</span><span class="title">Cold Open — 2 Grafiker</span><span class="badge-sm">tbd</span></span></li>
+        <li><a href="ep01-opening.html"><span class="marker">01</span><span class="title">Opening — Baby Bizz richtet her</span><span class="badge-sm">8 Shots</span></a></li>
+        <li><span class="disabled"><span class="marker">02</span><span class="title">Beat 1 — Ankunft im Flur</span><span class="badge-sm">tbd</span></span></li>
+        <li><span class="disabled"><span class="marker">03</span><span class="title">Beat 2 — Das Teilen (Stuhlkreis)</span><span class="badge-sm">tbd</span></span></li>
+        <li><span class="disabled"><span class="marker">04</span><span class="title">Beat 3 — Der Bruch</span><span class="badge-sm">tbd</span></span></li>
+        <li><span class="disabled"><span class="marker">05</span><span class="title">Beat 4 — Cliffhanger</span><span class="badge-sm">tbd</span></span></li>
+      </ul>
+    </div>
+    <div class="idx-ep">
+      <div class="idx-ep-head"><span>Episode 02</span><span class="lock">🔒 tbd</span></div>
+      <ul class="idx-list"><li><span class="disabled"><span class="marker">—</span><span class="title">Story noch offen</span></span></li></ul>
+    </div>
+    <div class="idx-ep">
+      <div class="idx-ep-head"><span>Episode 03</span><span class="lock">🔒 tbd</span></div>
+      <ul class="idx-list"><li><span class="disabled"><span class="marker">—</span><span class="title">Story noch offen</span></span></li></ul>
+    </div>
+  </div>
+  <div class="idx-foot">THE OUTSIDERS · Navigation · Production-Seiten sind noindex</div>
+</aside>
+<script>
+function idxOpen(){ document.getElementById('idxDrawer').classList.add('open'); document.getElementById('idxDrawer').setAttribute('aria-hidden','false'); document.getElementById('idxOverlay').classList.add('open'); }
+function idxClose(){ document.getElementById('idxDrawer').classList.remove('open'); document.getElementById('idxDrawer').setAttribute('aria-hidden','true'); document.getElementById('idxOverlay').classList.remove('open'); }
+document.addEventListener('keydown', e => { if(e.key==='Escape') idxClose(); });
 </script>
 
 </body>
